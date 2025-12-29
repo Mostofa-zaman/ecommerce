@@ -1,0 +1,378 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+/* -----------common color------- */
+
+/* ======= root part start ========= */
+:root {
+    /*######### gray ###################*/
+    --gray_00: #FFFFFF;
+    --gray_50: #F2F4F5;
+    --gray_100: #E4E7E9;
+    --gray_200: #C9CFD2;
+    --gray_300: #ADB7BC;
+    --gray_400: #929FA5;
+    --gray_500: #77878F;
+    --gray_600: #5F6C72;
+    --gray_700: #475156;
+    --gray_800: #303639;
+    --gray_900: #191C1F;
+    /*######### primary ###################*/
+
+    --primary_50: #FFF3EB;
+    --primary_100: #FFE7D6;
+    --primary_200: #FFCEAD;
+    --primary_300: #FFB685;
+    --primary_400: #FF9D5C;
+    --primary_500: #FA8232;
+    --primary_600: #DE732D;
+    --primary_700: #99501F;
+    --primary_800: #663514;
+    --primary_900: #331B0A;
+    /*############ Secondary ###############*/
+    --secondary_50: #EAF6FE;
+    --secondary_100: #D5EDFD;
+    --secondary_200: #ABDBFA;
+    --secondary_300: #81C9F8;
+    --secondary_400: #57B7F5;
+    --secondary_500: #2DA5F3;
+    --secondary_600: #2484C2;
+    --secondary_700: #1B6392;
+    --secondary_800: #1B6392;
+    --secondary_900: #092131;
+    /*############ success ##################*/
+    --success_50: #EAF7E9;
+    --success_100: #D5F0D3;
+    --success_200: #ABE0A7;
+    --success_300: #81D17C;
+    --success_400: #57C150;
+    --success_500: #2DB224;
+    --success_600: #248E1D;
+    --success_700: #1B6B16;
+    --success_800: #12470E;
+    --success_900: #092407;
+    /*############ warning ##################*/
+    --warning_50: #FDFAE7;
+    --warning_100: #FBF4CE;
+    --warning_200: #F7E99E;
+    --warning_300: #F3DE6D;
+    --warning_400: #EFD33D;
+    --warning_500: #EBC80C;
+    --warning_600: #BCA00A;
+    --warning_700: #8D7807;
+    --warning_800: #5E5005;
+    --warning_900: #5E5005;
+    /*############ danger ##################*/
+
+    --danger_50: #FDEEEE;
+    --danger_100: #FCDEDE;
+    --danger_200: #F8BCBC;
+    --danger_300: #F59B9B;
+    --danger_400: #F17979;
+    --danger_500: #EE5858;
+    --danger_600: #BE4646;
+    --danger_700: #8F3535;
+    --danger_800: #5F2323;
+    --danger_900: #301212;
+    /* -------font family ------ */
+    --public_sans: "Public Sans", sans-serif;
+}
+ 
+/* ======= root part end ========= */
+
+/* -----------common color--------------------------/
+
+
+/* ======= theme part start ========= */
+
+
+@theme {
+   
+
+    /* ############# gray ############### */
+    --color-gray_00: var(--gray_00);
+    --color-gray_50: var(--gray_50);
+    --color-gray_100: var(--gray_100);
+    --color-gray_200: var(--gray_200);
+    --color-gray_300: var(--gray_300);
+    --color-gray_400: var(--gray_400);
+    --color-gray_500: var(--gray_500);
+    --color-gray_600: var(--gray_600);
+    --color-gray_700: var(--gray_700);
+    --color-gray_800: var(--gray_800);
+    --color-gray_900: var(--gray_900);
+    /*############## primary ###################*/
+
+    --color-primary_50: var(--primary_50);
+    --color-primary_100: var(--primary_100);
+    --color-primary_200: var(--primary_200);
+    --color-primary_300: var(--primary_300);
+    --color-primary_400: var(--primary_400);
+    --color-primary_500: var(--primary_500);
+    --color-primary_600: var(--primary_600);
+    --color-primary_700: var(--primary_700);
+    --color-primary_800: var(--primary_800);
+    --color-primary_900: var(--primary_900);
+    /*############### primary ###################*/
+    --color-secondary_50: var(--secondary_50);
+    --color-secondary_100: var(--secondary_100);
+    --color-secondary_200: var(--secondary_200);
+    --color-secondary_300: var(--secondary_300);
+    --color-secondary_400: var(--secondary_400);
+    --color-secondary_500: var(--secondary_500);
+    --color-secondary_600: var(--secondary_600);
+    --color-secondary_700: var(--secondary_700);
+    --color-secondary_800: var(--secondary_800);
+    --color-secondary_900: var(--secondary_900);
+    /*############### success ###################*/
+    --color-success_50: var(--success_50);
+    --color-success_100: var(--success_100);
+    --color-success_200: var(--success_200);
+    --color-success_300: var(--success_300);
+    --color-success_400: var(--success_400);
+    --color-success_500: var(--success_500);
+    --color-success_600: var(--success_600);
+    --color-success_700: var(--success_700);
+    --color-success_800: var(--success_800);
+    --color-success_900: var(--success_900);
+    /*############### warning ###################*/
+    --color-warning_50: var(--warning_50);
+    --color-warning_100: var(--warning_100);
+    --color-warning_200: var(--warning_200);
+    --color-warning_300: var(--warning_300);
+    --color-warning_400: var(--warning_400);
+    --color-warning_500: var(--warning_500);
+    --color-warning_600: var(--warning_600);
+    --color-warning_700: var(--warning_700);
+    --color-warning_800: var(--warning_800);
+    --color-warning_900: var(--warning_900);
+    /*############### danger ###################*/
+    --color-danger_50: var(--danger_50);
+    --color-danger_100: var(--danger_100);
+    --color-danger_200: var(--danger_200);
+    --color-danger_300: var(--danger_300);
+    --color-danger_400: var(--danger_400);
+    --color-danger_500: var(--danger_500);
+    --color-danger_600: var(--danger_600);
+    --color-danger_700: var(--danger_700);
+    --color-danger_800: var(--danger_800);
+    --color-danger_900: var(--danger_900);
+
+
+}
+/* =========color theme end================ */
+
+/* =========font theme start================ */
+
+@theme{
+    --font-public_sans: var(--public_sans);
+}
+
+
+/* ======= theme part end ========= */
+
+/* -----------common body------------------------- */
+.body_xxl {
+    
+   @apply font-normal text-2xl font-public_sans leading-8 ;
+}
+.body_xl_400 {
+    
+   @apply font-normal text-xl font-public_sans leading-7 ;
+}
+.body_xl_500 {
+    
+   @apply font-medium text-xl font-public_sans  leading-7;
+}
+.body_xl_600 {
+    
+   @apply font-semibold text-xl font-public_sans leading-7 ;
+}
+/* -------body larg---------------- */
+.body_lg_400 {
+    
+   @apply font-normal text-xl font-public_sans leading-7 ;
+}
+.body_lg_500 {
+    
+   @apply font-medium text-lg font-public_sans leading-6 ;
+}
+.body_lg_600 {
+    
+   @apply font-semibold text-lg font-public_sans leading-6 ;
+}
+/* ------------------medium----------- */
+.body_md_400 {
+    
+   @apply font-normal text-[16px] font-public_sans leading-6 ;
+}
+.body_md_500 {
+    
+   @apply font-medium text-[16px] font-public_sans leading-6 ;
+}
+.body_md_600 {
+    
+   @apply font-semibold text-[16px] font-public_sans leading-6 ;
+}
+/* ----------small--------------- */
+.body_sm_400 {
+    
+   @apply font-normal text-[14px] font-public_sans leading-5 ;
+}
+.body_sm_500 {
+    
+   @apply font-medium text-[14px] font-public_sans leading-5 ;
+}
+.body_sm_400 {
+    
+   @apply font-semibold text-[14px] font-public_sans leading-5 ;
+}
+/* -----------tiny------------- */
+.body_tiny_400 {
+    
+   @apply font-normal text-[12px] font-public_sans leading-4 ;
+}
+.body_tiny_500 {
+    
+   @apply font-medium text-[12px] font-public_sans leading-4 ;
+}
+.body_tiny_600 {
+    
+   @apply font-semibold text-[12px] font-public_sans leading-4 ;
+}
+/* ----------extra small-------------- */
+.body_xs_400 {
+    
+   @apply font-normal text-[11px] font-public_sans leading-3 ;
+}
+.body_xs_500 {
+    
+   @apply font-medium text-[11px] font-public_sans leading-3 ;
+}
+.body_xs_600 {
+    
+   @apply font-semibold text-[11px] font-public_sans leading-3 ;
+}
+/* -----------common body------------------------- */
+
+/* -----------------common label-------------- */
+
+.label1{
+     @apply font-medium text-lg font-public_sans leading-7 ;
+}
+.label2{
+     @apply font-medium text-[16px] font-public_sans leading-6 ;
+}
+.label3{
+     @apply font-medium text-[14px] font-public_sans leading-5 ;
+}
+.label4{
+     @apply font-medium text-[12px] font-public_sans leading-4 ;
+}
+.label5{
+     @apply font-medium text-[11px] font-public_sans leading-4 ;
+}
+/* -----------------common label-------------- */
+/* -----------------common heading-------------- */
+
+.heading1{
+     @apply font-semibold text-[32px] font-public_sans leading-[40px] ;
+}
+.heading2{
+     @apply font-semibold text-[28px] font-public_sans leading-[32px] ;
+}
+.heading3{
+     @apply font-semibold text-[24px] font-public_sans leading-[32px] ;
+}
+.heading6{
+     @apply font-bold text-[16px] font-public_sans leading-[56px] ;
+}
+.heading7{
+     @apply font-bold text-[14px] font-public_sans leading-[48px] ;
+}
+
+/* -----------------common heading-------------- */
+/* -----------------common display-------------- */
+.display1{
+     @apply font-semibold text-[64px] font-public_sans leading-[72px] ;
+}
+.display2{
+     @apply font-semibold text-[56px] font-public_sans leading-[64px] ;
+}
+.display3{
+     @apply font-semibold text-[48px] font-public_sans leading-[56px] ;
+}
+.display4{
+     @apply font-semibold text-[40px] font-public_sans leading-[48px] ;
+}
+.display5{
+     @apply font-semibold text-[36px] font-public_sans leading-[44px] ;
+}
+/* -----------------common display-------------- */
+
+
+/* ------------- swiper two -------------- */
+.autoplay-progress {
+    position: absolute;
+    right: 8px;
+    bottom: 2px;
+    z-index: 20;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.autoplay-progress svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.autoplay-progress circle {
+    fill: none;
+    stroke: rgb(5, 183, 44);
+    stroke-width: 4px;
+    stroke-dasharray: 126; /* 2 * π * r (2 * 3.14 * 20) */
+    stroke-dashoffset: calc(126 * var(--progress, ));
+    transition: stroke-dashoffset 0.2s linear;
+}
+
+.autoplay-progress span {
+    position: absolute;
+    font-size: 12px;
+    color: black;
+   
+}
+/*     navigation  */
+.swiper-button-next,
+.swiper-button-prev {
+  color: red !important; /* Arrow color */
+  --swiper-navigation-size: 35px; /* Optional: arrow size */
+   background-color: rgb(227, 168, 43);
+   border-radius: 50%;
+   width: 50px !important;
+   height: 50px !important;
+    position: relative;
+   
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: blue !important;
+}
+.swiper-button-next {
+  right: -3px !important;
+  position: absolute;
+ 
+}
+
+.swiper-button-prev {
+  left: -3px !important;
+}
+.myswiper .swiper-button-prev{
+   position: absolute;
+      width: 50px !important;
+}
