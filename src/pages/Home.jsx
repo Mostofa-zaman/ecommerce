@@ -9,6 +9,8 @@ import Category from '../components/home/category/Index'
 import ProductVariant from '../components/home/ProductVariant/Index'
 import Display from '../components/home/display/Index'
 import BestProduct from '../components/home/BestProduct/Index'
+import Footer from '../components/home/footer/Footer'
+import Subscribe from '../components/home/subscribe/Index'
 
 
 const Home = () => {
@@ -25,6 +27,8 @@ const Home = () => {
     <ProductVariant/>
     <Display/>
     <BestProduct/>
+    <Subscribe/>
+    <Footer/>
     
     </>
   )
