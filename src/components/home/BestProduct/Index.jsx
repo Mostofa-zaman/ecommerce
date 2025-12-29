@@ -1,42 +1,60 @@
-import React from 'react'
-import Container from '../../commonComponent/Container'
-import { usegetproductbylimit } from '../../../hooks/useCategory'
-import ErrorPage from '../../commonComponent/error/Error'
+import React from "react";
+import Container from "../../commonComponent/Container";
+import { usegetproductbylimit } from "../../../hooks/useCategory";
+import ErrorPage from "../../commonComponent/error/Error";
+import { BestSellingProductContent } from "../../commonComponent/BestSellingProductContent";
 
 const BestProduct = () => {
-
-    const {isPending, error, data ,refetch} = usegetproductbylimit()
-    if(error){
-        return(
-            <ErrorPage error={error} onRefetch={refetch}/>
-        )
-    }
+  const { isPending, error, data, refetch } = usegetproductbylimit();
+  if (error) {
+    return <ErrorPage error={error} onRefetch={refetch} />;
+  }
+  if (isPending) {
+    return <div className="">loading...</div>;
+  }
+  const bestproduct = [
+    {
+      id: 1,
+      start: 0,  
+      end: 3,
+      title: "FLASH SALE TODAY",
+    },
+    {
+      id: 2,
+      start: 3,
+      end: 6,
+      title: "BEST SELLER",
+    },
+    {
+      id: 3,
+      start: 6,
+      end: 9,
+      title: "TOP RATED",
+    },
+    {
+      id: 4,
+      start: 9,
+      end: 12,
+      title: "NEW ARRIVALS",
+    },
+  ];
   return (
-   <section className='py-40'>
-    <Container>
-     <div className="grid grid-cols-4 gap-x-4 items-center justify-between">
-           {[... new Array(4)].map((_,imdex)=>(
-
-
-       <div className="">
-             <h1 className='body_md_600 text-gray_900 mb-5'>FLASH SALE TODAY</h1>
-            {/* product details */}
-
-            <div className="grid grid-cols-[30%70%] border border-gray_500 px-2 py-3">
-                <img src="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D" className='w-[80px] h-[80px] object-cover' alt="" />
-                <div className="">
-                    <h3 className='body_sm_400 text-gray_900'> Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear...</h3>
-                    <p>$1,500</p>
+    <section className="py-40">
+      <Container>
+        <div className="grid grid-cols-4 gap-x-4 items-center justify-between">
+            {bestproduct?.map((item)=>( 
+                <div key={item.id}>
+                <BestSellingProductContent productlist={data.data.products.slice(item.start , item.end)}
+            title={ item.title || `FLASH SALE TODAY`}
+          />
                 </div>
-            </div>
-       </div>
-        ))}
-     </div>
-       
+            ))}
+            
         
-    </Container>
-   </section>
-  )
-}
+        </div>
+      </Container>
+    </section>
+  );
+};
 
-export default BestProduct
+export default BestProduct;
