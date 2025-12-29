@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import Container from '../../commonComponent/Container'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, EffectCards, Autoplay, Navigation } from 'swiper/modules';
-import { imagesProvider } from '../../../helpers/ImgProvider';
+import { imagesProvider } from '../../../helpers/imgProvider';
 
 const Banner = () => {
 

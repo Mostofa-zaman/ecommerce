@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Container from '../../commonComponent/Container'
-import { imagesProvider } from '../../../helpers/ImgProvider'
+import { imagesProvider } from '../../../helpers/imgProvider'
 import { icons } from '../../../helpers/iconProvider'
 import Button from '../../commonComponent/Button'
 
