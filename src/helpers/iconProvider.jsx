@@ -2,7 +2,7 @@ import {  CiTwitter ,CiLocationOn, CiTrophy } from "react-icons/ci";
 import { FaFacebook, FaHeartbeat, FaInstagram, FaPinterestP, FaRedditAlien, FaSearch, FaYoutube ,FaExclamation ,FaPhoneVolume } from "react-icons/fa";
 import { FiShoppingCart, FiUsers, } from "react-icons/fi";
 import { IoGitCompare } from "react-icons/io5";
-import { BsHeadphones } from "react-icons/bs";
+import { BsArrowRight, BsHeadphones } from "react-icons/bs";
 import { FaCcPaypal } from "react-icons/fa6";
 import { MdOutlinePayment } from "react-icons/md";
 
@@ -53,7 +53,7 @@ const icons = {
    FaCcPaypal ,
    CiTrophy,
    MdOutlinePayment,
-
+   BsArrowRight,
    
   
 

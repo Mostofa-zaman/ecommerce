@@ -1,15 +1,18 @@
-// import Button from "@/components/commonComponent/commonButton/Button";
-
-
+import { imagesProvider } from "../../../helpers/imgProvider";
 import Button from "../../commonComponent/Button";
 import Container from "../../commonComponent/Container";
 
 const Subscribe = () => {
-  /////////////////////////////////
-  /// images destructure here
-  /////////////////////////////////
-//   const { subscribe } = allImages;
 
+  /// images destructure here
+
+  const subimg = [
+    imagesProvider.subone,
+    imagesProvider.subtwo,
+    imagesProvider.subthree,
+    imagesProvider.subfour,
+    imagesProvider.subfive,
+  ];
   return (
     <div className="py-[72px] bg-secondary_700 ">
       <Container>
@@ -33,17 +36,16 @@ const Subscribe = () => {
           <div className="w-[500px] h-[1px] bg-gray_400 mt-8 mb-6"></div>
           <div className="flex items-center gap-x-12">
             {/* map here */}
-            {/* {subscribe.map((items, index) => {
-              return (
-                <div key={items.id}>
-                  <img
-                    src={items.src}
-                    alt={"subscribeImages" + " " + items.id}
-                    className="h-[23px] w-[100%] object-cover "
-                  />
-                </div>
-              );
-            })} */}
+
+            {subimg.map((img, index) => (
+              <div key={index}>
+                <img
+                  src={img}
+                  alt={`sub-image-${index}`}
+                  className="h-[80px] w-[100%] object-cover cursor-pointer"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </Container>
