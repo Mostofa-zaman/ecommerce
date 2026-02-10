@@ -16,11 +16,6 @@ import Subscribe from '../components/home/subscribe/Index'
 const Home = () => {
   return (
     <>
-    
-    <Header/>
-    <TopNav/>
-    <MiddleNav/>
-    <BottomNav/>
     <Banner/>
     <Features/>
     <Category/>
@@ -28,7 +23,7 @@ const Home = () => {
     <Display/>
     <BestProduct/>
     <Subscribe/>
-    <Footer/>
+   
     
     </>
   )
