@@ -376,3 +376,24 @@
    position: absolute;
       width: 50px !important;
 }
+
+/* custom scrollbar css */
+
+/* Virtuoso vertical scrollbar style */
+
+[data-testid="virtuoso-scroller"]::-webkit-scrollbar {
+  width: 6px;
+}
+
+[data-testid="virtuoso-scroller"]::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+[data-testid="virtuoso-scroller"]::-webkit-scrollbar-thumb {
+  background: green;
+  border-radius: 10px;
+}
+
+[data-testid="virtuoso-scroller"]::-webkit-scrollbar-thumb:hover {
+  background: red;
+}

@@ -27,30 +27,30 @@ const ProductVariant = () => {
   const handleCategoryMenu = (item) => {
     setSelectedCategory(item);
   };
-  // console.log('categoryData',categoryData?.data?.products)
 
   return (
     <section>
       <Container>
-        <div className="grid grid-cols-[22%75%] justify-between gap-4">
-          <div className="w-full  ">
-            <picture className="w-full ">
+        <div className="grid grid-cols-[23%_75%] justify-between gap-4">
+          <div className="w-full h-[820px]">
+            <picture className="w-full h-full">
               <img
                 src={imagesProvider.ProductVariant}
                 alt="Product Variant"
-                className="w-full  object-cover"
+                className="w-full h-full "
               />
             </picture>
           </div>
 
-          <div className=" ">
+          <div className="">
             {/* head part */}
-            <div className=" cursor-pointer body_sm_600 flex  items-center justify-between">
+            <div className="cursor-pointer body_sm_600 flex items-center justify-between">
               <h2>Featured Products</h2>
-              <div className="flex gap-x-4 items-center  ">
+              <div className="flex gap-x-4 items-center">
                 <h2 className="cursor-pointer body_sm_600">All Product</h2>
                 {data?.data?.slice(0, 8).map((item) => (
                   <h3
+                    key={item}
                     className="cursor-pointer body_sm_600"
                     onClick={() => handleCategoryMenu(item)}
                   >
@@ -59,8 +59,9 @@ const ProductVariant = () => {
                 ))}
               </div>
             </div>
+
             {/* tail part */}
-            <div className="flex flex-wrap justify-between  ">
+            <div className="flex flex-wrap justify-between">
               {selectedCategory ? (
                 <Product
                   isloading={iscategoryLoading}
