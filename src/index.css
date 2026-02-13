@@ -312,7 +312,7 @@
 /* -----------------common display-------------- */
 
 
-/* ------------- swiper two -------------- */
+/* ---------------- swiper two -------------- */
 .autoplay-progress {
     position: absolute;
     right: 8px;
@@ -335,7 +335,7 @@
     fill: none;
     stroke: rgb(5, 183, 44);
     stroke-width: 4px;
-    stroke-dasharray: 126; /* 2 * π * r (2 * 3.14 * 20) */
+    stroke-dasharray: 126; 
     stroke-dashoffset: calc(126 * var(--progress, ));
     transition: stroke-dashoffset 0.2s linear;
 }
@@ -349,8 +349,8 @@
 /*     navigation  */
 .swiper-button-next,
 .swiper-button-prev {
-  color: red !important; /* Arrow color */
-  --swiper-navigation-size: 35px; /* Optional: arrow size */
+  color: red !important; 
+  --swiper-navigation-size: 35px; 
    background-color: rgb(227, 168, 43);
    border-radius: 50%;
    width: 50px !important;
@@ -379,7 +379,6 @@
 
 /* custom scrollbar css */
 
-/* Virtuoso vertical scrollbar style */
 
 [data-testid="virtuoso-scroller"]::-webkit-scrollbar {
   width: 6px;
