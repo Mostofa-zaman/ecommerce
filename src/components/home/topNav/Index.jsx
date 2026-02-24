@@ -1,4 +1,9 @@
-<section className='bg-secondary_700'>
+import React from 'react'
+import Container from '../../commonComponent/Container'
+
+const TopNav = () => {
+  return (
+ <section className='bg-secondary_700'>
   <Container>
     <div className="flex flex-col sm:flex-row justify-between items-center gap-y-2 py-2">
 
@@ -23,3 +28,8 @@
     </div>
   </Container>
 </section>
+
+  )
+}
+
+export default TopNav

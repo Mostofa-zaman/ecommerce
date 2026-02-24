@@ -1,4 +1,13 @@
-<section className='bg-gray_900 py-[18px]'>
+
+import React from 'react'
+import Container from '../../commonComponent/Container'
+import { imagesProvider } from '../../../helpers/imgProvider'
+import Button from '../../commonComponent/Button'
+import { FaArrowRight } from 'react-icons/fa'
+
+const Header = () => {
+  return (
+   <section className='bg-gray_900 py-[18px]'>
   <Container>
     <div className="flex flex-col sm:flex-row items-center justify-between gap-y-4">
 
@@ -28,3 +37,7 @@
     </div>
   </Container>
 </section>
+  )
+}
+
+export default Header
