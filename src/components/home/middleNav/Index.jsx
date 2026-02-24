@@ -38,9 +38,6 @@ const MiddleNav = () => {
     }
 
   }
-
-
-
   return (
     <section className='bg-secondary_700 py-5 border-t border-t-gray_100'>
       <Container>
@@ -48,8 +45,7 @@ const MiddleNav = () => {
           <picture>
             <img src={logoMiddle} alt={logoMiddle} />
           </picture>
-
-
+          {/* search input */}
           <div className="relative">
             <input type="search"
               name=' '
@@ -80,7 +76,7 @@ const MiddleNav = () => {
               <span className=' text-gray_00'>
               <icon.icon size={20}/>
             </span> 
-            <span className='w-4 h-4 absolute bg-gray_50 top-40 right-30 justify-center items-center flex text-[15px] rounded-full'>2</span>
+            <span className='w-4 h-4 absolute bg-gray_50 top-38 right-66 justify-center items-center flex text-[15px] rounded-full'>2</span>
             </div>
             ):(
               <span className=' text-gray_00'>
