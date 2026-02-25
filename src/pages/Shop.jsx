@@ -3,6 +3,7 @@ import BreadCrumb from '../components/commonComponent/BreadCrumb'
 import Container from '../components/commonComponent/Container'
 import CategoryItemList from '../components/shop/left/category/CategoryItemList';
 import CategoryList from '../components/shop/left/category/CategoryList';
+import PriceRange from '../components/shop/left/PriceRange/PriceRange';
 import { useCategory } from '../hooks/useCategory'
 
 const Shop = () => {
@@ -20,12 +21,16 @@ const Shop = () => {
        </div>
      <Container>
         <div className="grid grid-cols-[30%70%] h-screen" >
-         <div className="bg-secondary_500 h-full">
+         <div className=" h-full">
 
           <CategoryList>
            <CategoryItemList  cItem = {[...categoryListData.data]}/>
            
           </CategoryList>
+
+          {/* price range */}
+
+          <PriceRange/>
          </div>
         <div className="bg-primary_600 h-full ">2</div>
        </div>
