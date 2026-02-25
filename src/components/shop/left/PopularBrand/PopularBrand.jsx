@@ -23,12 +23,14 @@ const PopularBrand = () => {
   {popularBrands.map((brand) => (
     <div key={brand.name} className="flex items-center gap-x-2">
       <input
-        type="checkbox"
+        type="radio"
         id={brand.name}
         name="popularBrand"
+   
       />
       <label
         htmlFor={brand.name}
+         name="popularBrand"
         className="body_sm_600 text-gray_600 cursor-pointer"
       >
         {brand.name}

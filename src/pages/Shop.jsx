@@ -4,6 +4,7 @@ import Container from '../components/commonComponent/Container'
 import CategoryItemList from '../components/shop/left/category/CategoryItemList';
 import CategoryList from '../components/shop/left/category/CategoryList';
 import PopularBrand from '../components/shop/left/PopularBrand/PopularBrand';
+import PopularTags from '../components/shop/left/PopularTag/PopularTags';
 import PriceRange from '../components/shop/left/PriceRange/PriceRange';
 import { useCategory } from '../hooks/useCategory'
 
@@ -34,6 +35,8 @@ const Shop = () => {
           <PriceRange/>
           {/* popular brand */}
           <PopularBrand/>
+          {/* popular tags */}
+          <PopularTags/>
          </div>
         <div className="bg-primary_600 h-full ">2</div>
        </div>
