@@ -14,7 +14,7 @@ import subfive from '../assets/images/subfive.png'
 import footerlogo from '../assets/images/footerlogo.png'
 import footerone from '../assets/images/footerone.png'
 import footertwo from '../assets/images/footertwo.png'
-// hello
+import shopleftimg from '../assets/images/shopleftimg.png'
 const imagesProvider ={
      logo,
      logoMiddle,
@@ -32,7 +32,7 @@ const imagesProvider ={
      footerlogo,
      footerone,
      footertwo,
-
+     shopleftimg,
 
 }
 export {imagesProvider}

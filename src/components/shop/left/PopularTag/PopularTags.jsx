@@ -21,12 +21,8 @@ const PopularTags = () => {
       <h2 className="pb-4">Popular Tags</h2>
      <ul className="flex flex-wrap gap-x-3 gap-y-3 cursor-pointer">
   {popularTags.map((tag) => (
-    <div key={tag.name} className="flex items-center gap-x-2">
-      <input
-        type="radio"
-        id={tag.name}
-        name="popularTag"
-      />
+    <div key={tag.name} className="flex items-center gap-x-2 border border-gray_100 rounded-sm p-4">
+     
       <label
         htmlFor={tag.name}
           name="popularTag"
