@@ -5,6 +5,7 @@ import CategoryList from "../components/shop/left/category/CategoryList";
 import PopularBrand from "../components/shop/left/PopularBrand/PopularBrand";
 import PopularTags from "../components/shop/left/PopularTag/PopularTags";
 import PriceRange from "../components/shop/left/PriceRange/PriceRange";
+import SearchTab from "../components/shop/right/SearchTab";
 import { imagesProvider } from "../helpers/imgProvider";
 import { useCategory } from "../hooks/useCategory";
 
@@ -48,7 +49,9 @@ const Shop = () => {
               />
             </div>
           </div>
-          <div className="bg-primary_600 h-full ">2</div>
+          <div className=" h-full ">
+            <SearchTab/>
+          </div>
         </div>
       </Container>
     </div>
