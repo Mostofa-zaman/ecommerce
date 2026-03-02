@@ -4,6 +4,8 @@ import Container from '../../commonComponent/Container'
 import { imagesProvider } from '../../../helpers/imgProvider'
 import Button from '../../commonComponent/Button'
 import { FaArrowRight } from 'react-icons/fa'
+import { Link } from 'react-router'
+//  
 
 const Header = () => {
   return (
@@ -28,11 +30,13 @@ const Header = () => {
       </div>
 
       {/* button */}
-      <Button className="bg-warning_500 w-full sm:w-auto">
-        <span className='heading7 text-gray_900 flex items-center justify-center gap-x-3 text-sm sm:text-base'>
-          Shop now <FaArrowRight />
-        </span>
-      </Button>
+     <Link to="/shop" className="w-full sm:w-auto">
+  <Button className="bg-warning_500 w-full sm:w-auto">
+    <span className='heading7 text-gray_900 flex items-center justify-center gap-x-3 text-sm sm:text-base'>
+      Shop now <FaArrowRight />
+    </span>
+  </Button>
+</Link>
 
     </div>
   </Container>
