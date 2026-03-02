@@ -39,57 +39,60 @@ const MiddleNav = () => {
 
   }
   return (
-    <section className='bg-secondary_700 py-5 border-t border-t-gray_100'>
-      <Container>
-        <div className="flex justify-between">
-          <picture>
-            <img src={logoMiddle} alt={logoMiddle} />
-          </picture>
-          {/* search input */}
-          <div className="relative">
-            <input type="search"
-              name=' '
-              id=''
-              onChange={handleTyping}
-              className='bg-gray_00 py-3  
-            px-3 placeholder:text-gray_300 placeholder:body_sm_400
-            w-[600px] outline-0 rounded' placeholder='Search for anything...' />
-            {showSearchIcons == true ? (
-              <span className='etxt-gray_900 absolute top-1/2 -translate-1/2 right-4'><Search size={18} />
-              </span>
-            ) : (
-              null
-            )}
-            {showSearchIcons == false && (<div className="absolute top-1/2 -translate-1/2 right-0">
-              <Button className={`bg-warning_500 py-1`}>
-                <span className='body_sm_400'>Search</span>
-              </Button>
-            </div>
-          )}
+ <section className='bg-secondary_700 py-5 border-t border-t-gray_100'>
+  <Container>
+    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      
+      {/* Logo */}
+      <picture>
+        <img src={logoMiddle} alt="logo" className="w-32 lg:w-auto" />
+      </picture>
 
+      {/* Search */}
+      <div className="relative w-full lg:w-[500px]">
+        <input
+          type="search"
+          onChange={handleTyping}
+          className="bg-gray_00 py-3 px-3 w-full outline-0 rounded"
+          placeholder="Search for anything..."
+        />
+
+        {showSearchIcons ? (
+          <span className="absolute top-1/2 -translate-y-1/2 right-4 text-gray_900">
+            <Search size={18} />
+          </span>
+        ) : (
+          <div className="absolute top-1/2 -translate-y-1/2 right-2">
+            <Button className="bg-warning_500 py-1 px-3">
+              <span className="body_sm_400">Search</span>
+            </Button>
           </div>
-          {/*--------- all icons--------------  */}
-         <div className="flex gap-5 items-center">
-           {utisIcons ?.map((icon) => (
-            icon.to === "/cart" ? (
-            <div className="realtive">
-              <span className=' text-gray_00'>
-              <icon.icon size={20}/>
-            </span> 
-            <span className='w-4 h-4 absolute bg-gray_50 top-38 right-66 justify-center items-center flex text-[15px] rounded-full'>2</span>
+        )}
+      </div>
+
+      {/* Icons */}
+      <div className="flex gap-5 items-center justify-end">
+        {utisIcons?.map((icon, index) =>
+          icon.to === "/cart" ? (
+            <div key={index} className="relative">
+              <span className="text-gray_00">
+                <icon.icon size={20} />
+              </span>
+              <span className="w-4 h-4 absolute -top-2 -right-2 bg-gray_50 flex justify-center items-center text-xs rounded-full">
+                2
+              </span>
             </div>
-            ):(
-              <span className=' text-gray_00'>
-              <icon.icon size={20}/>
-            </span> 
-            )
-          ))}
-         </div>
+          ) : (
+            <span key={index} className="text-gray_00">
+              <icon.icon size={20} />
+            </span>
+          )
+        )}
+      </div>
 
-
-        </div>
-      </Container>
-    </section>
+    </div>
+  </Container>
+</section>
   )
 }
 
