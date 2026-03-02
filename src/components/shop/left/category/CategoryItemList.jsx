@@ -4,6 +4,7 @@ import { Virtuoso } from "react-virtuoso";
 const CategoryItemList = ({ cItem = [] }) => {
   return (
     <div className="h-[400px]">
+      <p className="pt-6 pb-4">CATEGORY</p>
       <Virtuoso
         style={{ height: "100%" }}
         data={cItem}

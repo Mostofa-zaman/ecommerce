@@ -1,40 +1,51 @@
-import React from 'react'
+import React, { useState } from "react";
 
 const PopularTags = () => {
-    const popularTags = [
-  { name: "Game", selected: false },
-  { name: "iPhone", selected: false },
-  { name: "TV", selected: false },
-  { name: "Asus Laptops", selected: false },
-  { name: "Macbook", selected: false },
-  { name: "SSD", selected: false },
-  { name: "Graphics Card", selected: true },
-  { name: "Power Bank", selected: false },
-  { name: "Smart TV", selected: false },
-  { name: "Speaker", selected: false },
-  { name: "Tablet", selected: false },
-  { name: "Microwave", selected: false },
-  { name: "Samsung", selected: false },
-];
+  const [activeTag, setActiveTag] = useState(null); // no tag selected initially
+
+  const popularTags = [
+    { name: "Game" },
+    { name: "iPhone" },
+    { name: "TV" },
+    { name: "Asus Laptops" },
+    { name: "Macbook" },
+    { name: "SSD" },
+    { name: "Graphics Card" },
+    { name: "Power Bank" },
+    { name: "Smart TV" },
+    { name: "Speaker" },
+    { name: "Tablet" },
+    { name: "Microwave" },
+    { name: "Samsung" },
+  ];
+
   return (
     <div className="pt-4">
-      <h2 className="pb-4">Popular Tags</h2>
-     <ul className="flex flex-wrap gap-x-3 gap-y-3 cursor-pointer">
-  {popularTags.map((tag) => (
-    <div key={tag.name} className="flex items-center gap-x-2 border border-gray_100 rounded-sm p-4">
-     
-      <label
-        htmlFor={tag.name}
-          name="popularTag"
-        className="body_sm_600 text-gray_600 cursor-pointer"
-      >
-        {tag.name}
-      </label>
-    </div>
-  ))}
-</ul>
-    </div>
-  )
-}
+      <h2 className="pb-4 font-semibold">POPULAR TAGS</h2>
 
-export default PopularTags
+      <ul className="flex flex-wrap gap-3">
+        {popularTags.map((tag) => {
+          const isActive = activeTag === tag.name;
+
+          return (
+            <li key={tag.name}>
+              <button
+                onClick={() => setActiveTag(tag.name)}
+                className={`px-4 py-2 rounded-sm border text-sm transition-all duration-200
+                ${
+                  isActive
+                    ? "bg-black text-white border-black"
+                    : "bg-white text-gray-600 border-gray-200 hover:bg-black hover:text-white"
+                }`}
+              >
+                {tag.name}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+
+export default PopularTags; 

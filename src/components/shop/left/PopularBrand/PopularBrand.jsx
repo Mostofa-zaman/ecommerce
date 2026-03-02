@@ -18,7 +18,7 @@ const PopularBrand = () => {
 ];
   return (
     <div className="pt-4">
-      <h2 className="pb-4">Popular Brand</h2>
+      <h2 className="pb-4">POPULAR BRAND</h2>
     <ul className="grid grid-cols-2 gap-y-3 cursor-pointer">
   {popularBrands.map((brand) => (
     <div key={brand.name} className="flex items-center gap-x-2">

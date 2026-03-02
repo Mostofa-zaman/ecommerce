@@ -13,8 +13,8 @@ const PriceRange = () => {
     { label: "$1,000 to $10,000", value: "1000_10000" },
   ];
   return (
-    <div className="pt-4 flex flex-col gap-y-4">
-      <h2 className="pb-4">Price Range</h2>
+    <div className="pt-20 flex flex-col gap-y-4">
+      <h2 className="pb-4">PRICE RANGE</h2>
       <RangeSlider id="range-slider-yellow" />
       {/* button */}
       <div className="flex justify-between items-center mt-4">

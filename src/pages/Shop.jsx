@@ -8,6 +8,7 @@ import PriceRange from "../components/shop/left/PriceRange/PriceRange";
 import SearchTab from "../components/shop/right/SearchTab";
 import { imagesProvider } from "../helpers/imgProvider";
 import { useCategory } from "../hooks/useCategory";
+import { FaCross } from "react-icons/fa";
 
 const Shop = () => {
   const {
@@ -50,7 +51,26 @@ const Shop = () => {
             </div>
           </div>
           <div className=" h-full ">
-            <SearchTab/>
+            <SearchTab />
+            <div className="flex items-center bg-gray_50 py-4 px-4">
+              <div className="flex items-center gap-x-4">
+                <span>Active Filters:</span>
+                {["Electronics Devices", "5 Star Rating"].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-x-2 bg-white px-2 py-1 rounded"
+                  >
+                    <span>{item}</span>
+                    <span>
+                      <FaCross />
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="ml-auto">
+                <span>65,867 Results found.</span>
+              </div>
+            </div>
           </div>
         </div>
       </Container>

@@ -1,13 +1,13 @@
 const ProductSkeleton = () => {
   return (
-    <div className="p-5 border border-gray_50 max-w-[240px] rounded animate-pulse">
-      <div className="flex flex-col items-start gap-y-3">
+    <div className="p-4 border border-gray_50 w-full sm:max-w-[240px] rounded animate-pulse">
+      <div className="flex flex-col gap-y-3">
         
         {/* HOT badge */}
         <div className="w-12 h-6 bg-gray-200 rounded"></div>
 
         {/* Image */}
-        <div className="w-[202px] h-[172px] bg-gray-200 rounded"></div>
+        <div className="w-full aspect-[4/3] bg-gray-200 rounded"></div>
 
         {/* Rating */}
         <div className="flex items-center gap-x-2 mt-2">
@@ -27,5 +27,3 @@ const ProductSkeleton = () => {
     </div>
   );
 };
-
-export default ProductSkeleton;
