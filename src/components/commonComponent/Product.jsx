@@ -4,7 +4,7 @@ import Star from "./Star";
 import ProductSkeleton from "../Skeletion/ProductSkeleton";
 import Container from "./Container";
 
-const Product = ({ productInfo, isloading,isError }) => {
+const Product = ({ productInfo, isloading,isError ,partialItemLoad = 8}) => {
   if (isloading) {
     return (
       <Container>
@@ -52,7 +52,7 @@ const Product = ({ productInfo, isloading,isError }) => {
 
   return (
   <div className="flex flex-wrap gap-4 mt-10 ">
-  {productInfo.data.products.slice(0,8).map((product) => (
+  {productInfo?.data?.products?.slice(0,partialItemLoad).map((product) => (
     <div
       key={product.id}
       className="  w-[calc(25%-1rem)] hover:shadow-lg hover: rounded-2xl transition-shadow duration-300 bg- "

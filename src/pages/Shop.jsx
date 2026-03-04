@@ -1,5 +1,6 @@
 import BreadCrumb from "../components/commonComponent/BreadCrumb";
 import Container from "../components/commonComponent/Container";
+import Product from "../components/commonComponent/Product";
 import CategoryItemList from "../components/shop/left/category/CategoryItemList";
 import CategoryList from "../components/shop/left/category/CategoryList";
 import PopularBrand from "../components/shop/left/PopularBrand/PopularBrand";
@@ -7,7 +8,7 @@ import PopularTags from "../components/shop/left/PopularTag/PopularTags";
 import PriceRange from "../components/shop/left/PriceRange/PriceRange";
 import SearchTab from "../components/shop/right/SearchTab";
 import { imagesProvider } from "../helpers/imgProvider";
-import { useCategory } from "../hooks/useCategory";
+import { useCategory, useProduct } from "../hooks/useCategory";
 import { FaCross } from "react-icons/fa";
 
 const Shop = () => {
@@ -16,12 +17,21 @@ const Shop = () => {
     error: categoryListError,
     data: categoryListData,
   } = useCategory();
+
+  const {
+    isPending: productPending,
+    error: productError,
+    data: productData,
+  } = useProduct();
+
   if (categoryListPending) {
     return <h1>loading</h1>;
   }
   if (categoryListError) {
     return <h1>error</h1>;
   }
+  console.log(productData.data.products);
+  
   return (
     <div>
       <div>
@@ -29,6 +39,7 @@ const Shop = () => {
       </div>
       <Container>
         <div className="grid grid-cols-[30%70%] ">
+          {/* left column */}
           <div className=" h-full">
             <CategoryList>
               <CategoryItemList cItem={[...categoryListData.data]} />
@@ -50,6 +61,7 @@ const Shop = () => {
               />
             </div>
           </div>
+          {/* right column */}
           <div className=" h-full ">
             <SearchTab />
             <div className="flex items-center bg-gray_50 py-4 px-4">
@@ -71,6 +83,8 @@ const Shop = () => {
                 <span>65,867 Results found.</span>
               </div>
             </div>
+            {/* product side */}
+            <Product productInfo={productData} isloading={productPending} isError={productError} partialItemLoad={24}/>
           </div>
         </div>
       </Container>
