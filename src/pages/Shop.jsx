@@ -38,7 +38,7 @@ const Shop = () => {
         <BreadCrumb />
       </div>
       <Container>
-        <div className="grid grid-cols-[30%70%] ">
+        <div className="grid grid-cols-[30%70%] gap-6  ">
           {/* left column */}
           <div className=" h-full">
             <CategoryList>
@@ -53,7 +53,7 @@ const Shop = () => {
             {/* popular tags */}
             <PopularTags />
             {/* watch img */}
-            <div className="bg-gray_100 w-full my-4 ">
+            <div className="bg-gray_100 w-full my-6 ">
               <img
                 src={imagesProvider.shopleftimg}
                 alt="watch"

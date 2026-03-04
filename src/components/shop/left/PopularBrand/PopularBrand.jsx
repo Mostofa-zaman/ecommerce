@@ -17,7 +17,7 @@ const PopularBrand = () => {
   { name: "One Plus", checked: false },
 ];
   return (
-    <div className="pt-4">
+    <div className="pt-10">
       <h2 className="pb-4">POPULAR BRAND</h2>
     <ul className="grid grid-cols-2 gap-y-3 cursor-pointer">
   {popularBrands.map((brand) => (

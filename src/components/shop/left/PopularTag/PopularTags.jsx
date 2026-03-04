@@ -20,7 +20,7 @@ const PopularTags = () => {
   ];
 
   return (
-    <div className="pt-4">
+    <div className="pt-10 pb-6">
       <h2 className="pb-4 font-semibold">POPULAR TAGS</h2>
 
       <ul className="flex flex-wrap gap-3">
