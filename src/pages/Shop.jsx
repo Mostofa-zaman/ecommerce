@@ -32,6 +32,10 @@ const Shop = () => {
   }
   console.log(productData.data.products);
   
+    const handleCategory = (item) => {
+    console.log(item );
+  };
+ 
   return (
     <div>
       <div>
@@ -42,7 +46,7 @@ const Shop = () => {
           {/* left column */}
           <div className=" h-full">
             <CategoryList>
-              <CategoryItemList cItem={[...categoryListData.data]} />
+              <CategoryItemList cItem={[...categoryListData.data]} Caregoryfn={handleCategory} />
             </CategoryList>
 
             {/* price range */}

@@ -1,7 +1,8 @@
 import React from "react";
 import { Virtuoso } from "react-virtuoso";
 
-const CategoryItemList = ({ cItem = [] }) => {
+const CategoryItemList = ({ cItem = [],Caregoryfn }) => {
+
   return (
     <div className="h-[400px]">
       <p className="pt-6 pb-4">CATEGORY</p>
@@ -18,7 +19,7 @@ const CategoryItemList = ({ cItem = [] }) => {
           )),
         }}
         itemContent={(_, item) => (
-          <div className="flex items-center gap-x-3 py-2 px-2 cursor-pointer">
+          <div className="flex items-center gap-x-3 py-2 px-2 cursor-pointer" key={item} onClick={()=> Caregoryfn (item)}>
             <input
               type="radio"
               id={item}
