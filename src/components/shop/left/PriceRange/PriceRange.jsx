@@ -1,48 +1,52 @@
-import React, { useState } from "react";
+import React from "react";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
-const PriceRange = () => {
-  const [value, setValue] = useState([30, 60]);
+
+const PriceRange = ({ priceRange, setPriceRange }) => {
+
   const priceRanges = [
-    { label: "All Price", value: "all" },
-    { label: "Under $20", value: "under_20" },
-    { label: "$25 to $100", value: "25_100" },
-    { label: "$100 to $300", value: "100_300" },
-    { label: "$300 to $500", value: "300_500" },
-    { label: "$500 to $1,000", value: "500_1000" },
-    { label: "$1,000 to $10,000", value: "1000_10000" },
+    { label: "All Price", range: [0, 1000] },
+    { label: "Under $20", range: [0, 20] },
+    { label: "$25 to $100", range: [25, 100] },
+    { label: "$100 to $300", range: [100, 300] },
+    { label: "$300 to $500", range: [300, 500] },
+    { label: "$500 to $1,000", range: [500, 1000] },
   ];
+
+  const handleSlider = (value) => {
+    setPriceRange(value);
+  };
+
+  const handleRadio = (range) => {
+    setPriceRange(range);
+  };
+
   return (
-    <div className="pt-28 flex flex-col gap-y-4">
-      <h2 className="pb-4">PRICE RANGE</h2>
-      <RangeSlider id="range-slider-yellow" />
-      {/* button */}
-      <div className="flex justify-between items-center mt-4">
-        <button className="border border-gray_100 grow mr-2 py-2 cursor-pointer">
-          Min price
-        </button>
-        <button className="border border-gray_100 grow ml-2 py-2 cursor-pointer">
-          Max price
-        </button>
+    <div className="pt-20 flex flex-col gap-y-4">
+      <h2 className="pb-4 font-semibold">PRICE RANGE</h2>
+
+      <RangeSlider
+        min={0}
+        max={1000}
+        step={10}
+        value={priceRange}
+        onInput={handleSlider}
+      />
+
+      <div className="flex justify-between">
+        <span>${priceRange[0]}</span>
+        <span>${priceRange[1]}</span>
       </div>
-      {/* price list */}
 
       <ul className="flex flex-col gap-y-3 cursor-pointer">
-        {priceRanges?.map((price) => (
-          <div className="flex items-center gap-x-2">
+        {priceRanges.map((price, index) => (
+          <div key={index} className="flex items-center gap-x-2">
             <input
               type="radio"
-              value={price.value}
-              id={price.label}
               name="priceRange"
+              onChange={() => handleRadio(price.range)}
             />
-            <label
-              className="body_sm_600 text-gray_600 cursor-pointer"
-              htmlFor={price.label}
-              name="priceRange"
-            >
-              {price.label}
-            </label>
+            <label>{price.label}</label>
           </div>
         ))}
       </ul>

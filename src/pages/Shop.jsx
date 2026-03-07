@@ -1,3 +1,4 @@
+import { useState } from "react";
 import BreadCrumb from "../components/commonComponent/BreadCrumb";
 import Container from "../components/commonComponent/Container";
 import Product from "../components/commonComponent/Product";
@@ -9,9 +10,13 @@ import PriceRange from "../components/shop/left/PriceRange/PriceRange";
 import SearchTab from "../components/shop/right/SearchTab";
 import { imagesProvider } from "../helpers/imgProvider";
 import { useCategory, useProduct } from "../hooks/useCategory";
-import { FaCross } from "react-icons/fa";
-
+import ErrorPage from "../components/commonComponent/error/Error";
+import ProductSkeleton from "../components/Skeletion/ProductSkeleton";
 const Shop = () => {
+  const [category, setCategory] = useState(null);
+  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [rating, setRating] = useState(null);
+  const [search, setSearch] = useState("");
   const {
     isPending: categoryListPending,
     error: categoryListError,
@@ -23,72 +28,115 @@ const Shop = () => {
     error: productError,
     data: productData,
   } = useProduct();
+  if (categoryListPending || productPending) {
+    return <ProductSkeleton />;
+  }
+  if (categoryListError || productError) {
+    return <ErrorPage />;
+  }
+  // all products
+  const products = productData?.data?.products || [];
+  // filtering
+  const filteredProducts = products
+    ?.filter((item) => {
+      if (!category) return true;
+      return item.category === category;
+    })
+    ?.filter((item) => {
+      return item.price >= priceRange[0] && item.price <= priceRange[1];
+    })
+    ?.filter((item) => {
+      if (!rating) return true;
+      return item.rating >= rating;
+    })
+    ?.filter((item) => {
+      if (!search) return true;
+      return item.title.toLowerCase().includes(search.toLowerCase());
+    });
 
-  if (categoryListPending) {
-    return <h1>loading</h1>;
-  }
-  if (categoryListError) {
-    return <h1>error</h1>;
-  }
-  console.log(productData.data.products);
-  
-    const handleCategory = (item) => {
-    console.log(item );
-  };
- 
   return (
     <div>
-      <div>
-        <BreadCrumb />
-      </div>
+      <BreadCrumb />
       <Container>
-        <div className="grid grid-cols-[30%70%] gap-6  ">
-          {/* left column */}
-          <div className=" h-full">
+        <div className="grid grid-cols-[30%70%] gap-6">
+          {/* LEFT SIDE */}
+          <div>
             <CategoryList>
-              <CategoryItemList cItem={[...categoryListData.data]} Caregoryfn={handleCategory} />
+              <CategoryItemList
+                cItem={[...categoryListData.data]}
+                Caregoryfn={setCategory}
+              />
             </CategoryList>
-
-            {/* price range */}
-
-            <PriceRange />
-            {/* popular brand */}
+            <PriceRange
+              priceRange={priceRange}
+              setPriceRange={setPriceRange}
+            />
+            {/* Rating */}
+            <div className="pt-10">
+              <h2 className="pb-3 font-semibold">Rating</h2>
+              {[5,4,3,2].map((item)=>(
+                <div
+                  key={item}
+                  className="cursor-pointer"
+                  onClick={()=>setRating(item)}
+                >
+                  ⭐ {item} Star & Up
+                </div>
+              ))}
+            </div>
             <PopularBrand />
-            {/* popular tags */}
             <PopularTags />
-            {/* watch img */}
-            <div className="bg-gray_100 w-full my-6 ">
+            <div className="bg-gray_100 w-full my-6">
               <img
                 src={imagesProvider.shopleftimg}
                 alt="watch"
-                className="w-full  object-cover"
+                className="w-full object-cover"
               />
             </div>
           </div>
-          {/* right column */}
-          <div className=" h-full ">
-            <SearchTab />
+          {/* RIGHT SIDE */}
+          <div>
+            <SearchTab setSearch={setSearch} />
+            {/* Active Filters */}
             <div className="flex items-center bg-gray_50 py-4 px-4">
               <div className="flex items-center gap-x-4">
-                <span>Active Filters:</span>
-                {["Electronics Devices", "5 Star Rating"].map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-x-2 bg-white px-2 py-1 rounded"
-                  >
-                    <span>{item}</span>
-                    <span>
-                      <FaCross />
+                {category && (
+                  <div className="flex gap-x-2 bg-white px-2 py-1">
+                    Category: {category}
+                    <span
+                      className="cursor-pointer"
+                      onClick={()=>setCategory(null)}
+                    >
+                      ❌
                     </span>
                   </div>
-                ))}
+                )}
+                {rating && (
+                  <div className="flex gap-x-2 bg-white px-2 py-1">
+                    Rating: {rating} Star
+                    <span
+                      className="cursor-pointer"
+                      onClick={()=>setRating(null)}
+                    >
+                      ❌
+                    </span>
+                  </div>
+                )}
+                <div className="flex gap-x-2 bg-white px-2 py-1">
+                  Price: ${priceRange[0]} - ${priceRange[1]}
+                </div>
               </div>
               <div className="ml-auto">
-                <span>65,867 Results found.</span>
+                <span>{filteredProducts.length} Results found</span>
               </div>
             </div>
-            {/* product side */}
-            <Product productInfo={productData} isloading={productPending} isError={productError} partialItemLoad={24}/>
+            {/* Products */}
+            <Product
+              productInfo={{ data: { products: filteredProducts } }}
+              isloading={productPending}
+              isError={productError}
+              partialItemLoad={24}
+            />
           </div>
         </div>
       </Container>

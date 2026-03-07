@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const SearchTab = () => {
+
+const SearchTab = ({setSearch}) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
