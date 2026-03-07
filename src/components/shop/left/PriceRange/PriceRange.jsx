@@ -33,10 +33,10 @@ const PriceRange = ({ priceRange, setPriceRange }) => {
         onInput={handleSlider}
       />
 
-      <div className="flex justify-between">
-        <span>${priceRange[0]}</span>
-        <span>${priceRange[1]}</span>
-      </div>
+    <div className="flex justify-between text-lg font-medium text-gray-700">
+  <span>Min: ${priceRange[0]}</span>
+  <span>Max: ${priceRange[1]}</span>
+</div>
 
       <ul className="flex flex-col gap-y-3 cursor-pointer">
         {priceRanges.map((price, index) => (

@@ -43,24 +43,24 @@ const Shop = () => {
   const products = productData?.data?.products || [];
 
   // filtering system
-const filteredProducts = products
-  ?.filter((item) => {
-    if (!category) return true;
-    return item.category === category;
-  })
-  ?.filter((item) => {
-    return item.price >= priceRange[0] && item.price <= priceRange[1];
-  })
-  ?.filter((item) => {
-    if (!rating) return true;
-    return item.rating >= rating;
-  })
-  ?.filter((item) => {
-    if (!search) return true;
-    return item.title.toLowerCase().includes(search.toLowerCase());
-  });
-  console.log(category)
-console.log(filteredProducts)
+  const filteredProducts = products
+    ?.filter((item) => {
+      if (!category) return true;
+      return item.category === category;
+    })
+    ?.filter((item) => {
+      return item.price >= priceRange[0] && item.price <= priceRange[1];
+    })
+    ?.filter((item) => {
+      if (!rating) return true;
+      return item.rating >= rating;
+    })
+    ?.filter((item) => {
+      if (!search) return true;
+      return item.title.toLowerCase().includes(search.toLowerCase());
+    });
+  console.log(category);
+  console.log(filteredProducts);
 
   return (
     <div>
@@ -102,7 +102,7 @@ console.log(filteredProducts)
               <img
                 src={imagesProvider.shopleftimg}
                 alt="watch"
-                className="w-full object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
@@ -149,17 +149,17 @@ console.log(filteredProducts)
             </div>
 
             {/* Products */}
-          <Product
-  productInfo={{
-    data: {
-      products: filteredProducts,
-    },
-  }}
-  isLoading={productPending}
-  isError={productError}
-  partialItemLoad={24}
-/>
-          </div>  
+            <Product
+              productInfo={{
+                data: {
+                  products: filteredProducts,
+                },
+              }}
+              isLoading={productPending}
+              isError={productError}
+              partialItemLoad={24}
+            />
+          </div>
         </div>
       </Container>
     </div>
