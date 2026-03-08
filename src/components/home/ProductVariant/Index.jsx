@@ -10,11 +10,13 @@ import Product from "../../commonComponent/Product";
 
 const ProductVariant = () => {
   const { data } = useCategory();
+
   const {
     isPending: isproductLoading,
     error: producterror,
     data: productData,
   } = useProduct();
+
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const {
@@ -23,7 +25,7 @@ const ProductVariant = () => {
     data: categoryData,
   } = usegetproductbycategory(selectedCategory);
 
-  //  onclick menu
+  // onclick menu
   const handleCategoryMenu = (item) => {
     setSelectedCategory(item);
   };
@@ -32,31 +34,36 @@ const ProductVariant = () => {
     <section>
       <Container>
         <div className="grid grid-cols-[23%_75%] justify-between gap-4">
+          
           <div className="w-full h-[820px]">
             <picture className="w-full h-full">
               <img
                 src={imagesProvider.ProductVariant}
                 alt="Product Variant"
-                className="w-full h-full "
+                className="w-full h-full"
               />
             </picture>
           </div>
 
-          <div className="">
+          <div>
             {/* head part */}
             <div className="cursor-pointer body_sm_600 flex items-center justify-between">
               <h2>Featured Products</h2>
-              <div className="flex gap-x-4 items-center">
+
+              <div className="flex items-center gap-x-4">
                 <h2 className="cursor-pointer body_sm_600">All Product</h2>
-                {data?.data?.slice(0, 8).map((item) => (
-                  <h3
-                    key={item}
-                    className="cursor-pointer body_sm_600"
-                    onClick={() => handleCategoryMenu(item)}
-                  >
-                    {item}
-                  </h3>
-                ))}
+
+                {data?.data
+                  ?.slice(0, 8)
+                  .map((item) => (
+                    <h3
+                      key={item}
+                      className="cursor-pointer body_sm_600"
+                      onClick={() => handleCategoryMenu(item)}
+                    >
+                      {item}
+                    </h3>
+                  ))}
               </div>
             </div>
 
@@ -77,6 +84,7 @@ const ProductVariant = () => {
               )}
             </div>
           </div>
+
         </div>
       </Container>
     </section>
