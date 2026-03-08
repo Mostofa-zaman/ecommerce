@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const SearchTab = ({ setSearch }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -13,7 +13,6 @@ const SearchTab = ({ setSearch }) => {
 
   return (
     <div className="flex items-center justify-between gap-6 flex-wrap">
-
       {/* Search */}
       <form
         className="w-full max-w-md m-4"
@@ -55,52 +54,51 @@ const SearchTab = ({ setSearch }) => {
       </form>
 
       {/* Dropdown */}
-    <div className="relative flex items-center gap-2">
-  <p className="text-sm mb-2">Sort by  :</p>
+      <div className="relative flex items-center gap-2">
+        <p className="text-sm mb-2">Sort by :</p>
 
-  <button
-    type="button"
-    onClick={() => setDropdownOpen(!dropdownOpen)}
-    className="inline-flex items-center justify-center text-white bg-black shadow-xs font-medium rounded-base text-sm px-4 py-2 rounded"
-  >
-    Menu
-    <svg
-      className="w-4 h-4 ms-1.5"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="m19 9-7 7-7-7"
-      />
-    </svg>
-  </button>
+        <button
+          type="button"
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+          className="inline-flex items-center justify-center text-white bg-black shadow-xs font-medium rounded-base text-sm px-4 py-2"
+        >
+          Menu
+          <svg
+            className="w-4 h-4 ms-1.5"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m19 9-7 7-7-7"
+            />
+          </svg>
+        </button>
 
-  {dropdownOpen && (
-    <div className="absolute top-full start-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-50 transition-all duration-200 ease-out">
-      <ul className="py-1 text-sm  font-medium">
-        {menuItems.map((item, index) => (
-          <li key={index}>
-            <button
-              onClick={() => {
-                item.onClick();
-                setDropdownOpen(false); // close dropdown after click
-              }}
-              className="w-full mr-20 px-4 py-2 hover:bg-gray-100 focus:bg-gray-100
-               rounded-md"
-            >
-              {item.label}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )}
-</div>
+        {dropdownOpen && (
+          <div className="absolute top-full start-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-50 transition-all duration-200 ease-out">
+            <ul className="py-1 text-sm font-medium">
+              {menuItems.map((item, index) => (
+                <li key={index}>
+                  <button
+                    onClick={() => {
+                      item.onClick();
+                      setDropdownOpen(false);
+                    }}
+                    className="w-full mr-20 px-4 py-2 hover:bg-gray-100 focus:bg-gray-100 rounded-md"
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
