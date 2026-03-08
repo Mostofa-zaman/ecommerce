@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 import Star from "./Star";
 import ProductSkeleton from "../Skeletion/ProductSkeleton";
 import Container from "./Container";
-const Product = ({ productInfo, isLoading, isError, partialItemLoad = 24 }) => {
+const Product = ({ productInfo, isLoading, isError, partialItemLoad = 8 }) => {
   if (isLoading) {
     return (
       <Container>
