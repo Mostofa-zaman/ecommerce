@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 
 const PriceRange = ({ priceRange, setPriceRange }) => {
-
+  const [value, setValue]= useState(30,60);
+  const[debouncedValue, setDebouncedValue] = useState(value);
   const priceRanges = [
     { label: "All Price", range: [0, 1000] },
     { label: "Under $20", range: [0, 20] },
@@ -12,6 +13,15 @@ const PriceRange = ({ priceRange, setPriceRange }) => {
     { label: "$300 to $500", range: [300, 500] },
     { label: "$500 to $1,000", range: [500, 1000] },
   ];
+  // debounced effect 3 second
+useEffect(()=>{
+  const timer = setTimeout(()=>{
+  setDebouncedValue(value);
+  console.log("debounced value" ,value)
+  },3000)
+  return () => clearTimeout(timer); 
+},[value])
+console.log(value)
 
   const handleSlider = (value) => {
     setPriceRange(value);
