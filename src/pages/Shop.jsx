@@ -75,7 +75,7 @@ const Shop = () => {
     <div>
       <BreadCrumb />
       <Container>
-        <div className="grid grid-cols-[30%70%] gap-6">
+        <div className="grid grid-cols-[25%75%] gap-6">
           {/* LEFT SIDE */}
           <div>
             <CategoryList>
@@ -154,7 +154,7 @@ const Shop = () => {
               productInfo={filterData ?? productData}
               isLoading={productPending}
               isError={productError}
-              partialItemLoad={24}
+              partialItemLoad={30}
             />
           </div>
         </div>
