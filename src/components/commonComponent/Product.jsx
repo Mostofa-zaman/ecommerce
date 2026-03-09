@@ -6,14 +6,10 @@ const Product = ({ productInfo, isLoading, isError, partialItemLoad = 8 }) => {
   if (isLoading) {
     return (
       <Container>
-        <div className="">
-          <div className="flex flex-wrap justify-between items-center">
-            {[...new Array(8)].map((_, index) => (
-              <div key={index}>
-                <ProductSkeleton />
-              </div>
-            ))}
-          </div>
+        <div className="flex flex-wrap justify-between items-center">
+          {[...new Array(8)].map((_, index) => (
+            <ProductSkeleton key={index} />
+          ))}
         </div>
       </Container>
     );
@@ -25,10 +21,10 @@ const Product = ({ productInfo, isLoading, isError, partialItemLoad = 8 }) => {
         <section className="bg-white dark:bg-gray-900">
           <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div className="mx-auto max-w-screen-sm text-center">
-              <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 dark:text-primary-500">
+              <h1 className="mb-4 text-7xl lg:text-9xl font-extrabold text-primary-600 dark:text-primary-500">
                 404
               </h1>
-              <p className="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">
+              <p className="mb-4 text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
                 Something's missing.
               </p>
               <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
@@ -68,17 +64,14 @@ const Product = ({ productInfo, isLoading, isError, partialItemLoad = 8 }) => {
                   alt={product.title}
                   className="w-full h-full object-cover bg-gray-100 rounded"
                 />
-
                 {/* Hover overlay buttons */}
-                <div className="absolute inset-0 flex justify-center items-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300  bg-opacity-20 rounded">
-                 <div className="absolute inset-0 flex justify-center items-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300  bg-opacity-30 rounded">
-  <button className="bg-black text-white px-4 py-2 rounded-full shadow-md hover:bg-gray-800 transition-colors duration-200 font-medium">
-    Add to Cart
-  </button>
-  <button className="bg-black text-red-500 px-3 py-2 rounded-full shadow-md hover:bg-gray-800 transition-colors duration-200">
-    ❤️
-  </button>
-</div>
+                <div className="absolute inset-0 flex justify-center items-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-opacity-30 rounded">
+                  <button className="bg-black text-white px-4 py-2 rounded-full shadow-md hover:bg-gray-800 transition-colors duration-200 font-medium">
+                    Add to Cart
+                  </button>
+                  <button className="bg-black text-red-500 px-3 py-2 rounded-full shadow-md hover:bg-gray-800 transition-colors duration-200">
+                    ❤️
+                  </button>
                 </div>
               </div>
 
