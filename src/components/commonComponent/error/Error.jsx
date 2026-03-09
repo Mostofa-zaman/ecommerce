@@ -3,11 +3,12 @@ import React from "react";
 const ErrorPage = ({
   message = "Something went wrong!",
   description = "We couldn’t load the data. Please try again.",
-  onRefetch = ()=>{}
+  onRefetch = null,
 }) => {
   return (
     <div className="min-h-[60vh] flex items-center justify-center px-4">
       <div className="max-w-md w-full bg-white border border-gray-200 rounded-xl shadow-sm p-8 text-center">
+        
         {/* Icon */}
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
           <svg
