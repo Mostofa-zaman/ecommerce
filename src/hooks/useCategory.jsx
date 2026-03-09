@@ -21,13 +21,13 @@ const useProduct = ()=>{
 }
  
 const usegetproductbycategory = (categoryName) => {
-  const { isPending, error, data } = useQuery({
+  const { isPending, error, data ,refetch } = useQuery({
     queryKey: ["categoryproduct", categoryName],
     queryFn: () => getProductbyCategory(categoryName),
     enabled: !!categoryName ,
   });
 
-  return { isPending, error, data };
+  return { isPending, error, data, refetch };
 };
 // best product using limit & skip
 const usegetproductbylimit = (limit) => {

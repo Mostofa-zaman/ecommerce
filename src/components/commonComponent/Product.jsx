@@ -1,5 +1,4 @@
-import React from "react";
-import { FaStar } from "react-icons/fa";
+
 import Star from "./Star";
 import ProductSkeleton from "../Skeletion/ProductSkeleton";
 import Container from "./Container";

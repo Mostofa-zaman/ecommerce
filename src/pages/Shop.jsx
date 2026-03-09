@@ -9,11 +9,12 @@ import PopularTags from "../components/shop/left/PopularTag/PopularTags";
 import PriceRange from "../components/shop/left/PriceRange/PriceRange";
 import SearchTab from "../components/shop/right/SearchTab";
 import { imagesProvider } from "../helpers/imgProvider";
-import { useCategory, useProduct } from "../hooks/useCategory";
+import { useCategory, usegetproductbycategory, useProduct } from "../hooks/useCategory";
 import ErrorPage from "../components/commonComponent/error/Error";
 import ProductSkeleton from "../components/Skeletion/ProductSkeleton";
 
 const Shop = () => {
+  const [searchitemCategory, setSearchitemCategory] = useState(null);
   const [category, setCategory] = useState(null);
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [rating, setRating] = useState(null);
@@ -30,13 +31,20 @@ const Shop = () => {
     error: productError,
     data: productData,
   } = useProduct();
+  const {isPending:filterPending, error:filterError, data:filterData, refetch }=usegetproductbycategory(searchitemCategory)
+
+   const handleCategory = ( item)=>{
+    setSearchitemCategory(item)
+  }
+
+
 
   if (categoryListPending || productPending) {
     return <ProductSkeleton />;
   }
 
-  if (categoryListError || productError) {
-    return <ErrorPage />;
+  if (categoryListError) {
+    return <ErrorPage  massage={isError.massage} onRefetch={refetch}/>;
   }
 
   // all products
@@ -60,12 +68,12 @@ const Shop = () => {
       return item.title.toLowerCase().includes(search.toLowerCase());
     });
   console.log(category);
-  console.log(filteredProducts);
+  console.log(filterData);
+
 
   return (
     <div>
       <BreadCrumb />
-
       <Container>
         <div className="grid grid-cols-[30%70%] gap-6">
           {/* LEFT SIDE */}
@@ -73,17 +81,13 @@ const Shop = () => {
             <CategoryList>
               <CategoryItemList
                 cItem={[...categoryListData.data]}
-                Caregoryfn={setCategory}
-                activeCategory={category}
+                Caregoryfn={handleCategory}
               />
             </CategoryList>
-
             <PriceRange priceRange={priceRange} setPriceRange={setPriceRange} />
-
             {/* Rating */}
             <div className="pt-10">
               <h2 className="pb-3 font-semibold">Rating</h2>
-
               {[5, 4, 3, 2].map((item) => (
                 <div
                   key={item}
@@ -94,10 +98,8 @@ const Shop = () => {
                 </div>
               ))}
             </div>
-
             <PopularBrand />
             <PopularTags />
-
             <div className="bg-gray_100 w-full my-6">
               <img
                 src={imagesProvider.shopleftimg}
@@ -106,7 +108,6 @@ const Shop = () => {
               />
             </div>
           </div>
-
           {/* RIGHT SIDE */}
           <div>
             <SearchTab setSearch={setSearch} />
@@ -150,11 +151,7 @@ const Shop = () => {
 
             {/* Products */}
             <Product
-              productInfo={{
-                data: {
-                  products: filteredProducts,
-                },
-              }}
+              productInfo={filterData ?? productData}
               isLoading={productPending}
               isError={productError}
               partialItemLoad={24}
