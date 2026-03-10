@@ -1,6 +1,8 @@
 import Star from "./Star";
+import { useVirtualizer } from '@tanstack/react-virtual';
 import ProductSkeleton from "../Skeletion/ProductSkeleton";
 import Container from "./Container";
+import { useRef } from "react";
 
 const Product = ({ productInfo, isLoading, isError, partialItemLoad = 8 }) => {
   if (isLoading) {
@@ -42,12 +44,37 @@ const Product = ({ productInfo, isLoading, isError, partialItemLoad = 8 }) => {
       </div>
     );
   }
+    const parentRef = useRef(null)
+    console.log("price filer data",parentRef)
+      // The virtualizer
+  const rowVirtualizer = useVirtualizer({
+    count:productInfo.length || 10000,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 35,
+  })
+
 
   return (
-    <div className="flex flex-wrap gap-4 mt-10">
-      {productInfo?.data?.products?.slice(0, partialItemLoad).map((product) => (
+    <div ref={parentRef}  style={{
+          height: `1500px`,
+          overflow: 'auto', // Make it scroll!
+        }}>
+     <div  className="flex flex-wrap gap-4 mt-10"   style={{
+            height: `${rowVirtualizer.getTotalSize()}px`,
+            width: '100%',
+            position: 'relative',
+          }}>
+       {rowVirtualizer.getVirtualItems().map((product) => (
         <div
-          key={product.id}
+         key={product.key}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: `${product.size}px`,
+                transform: `translateY(${product.start}px)`,
+              }}
           className="w-[calc(25%-1rem)] hover:shadow-lg rounded-2xl transition-shadow duration-300 bg-white relative"
         >
           <div className="p-5 border border-gray_50 rounded-2xl">
@@ -90,6 +117,7 @@ const Product = ({ productInfo, isLoading, isError, partialItemLoad = 8 }) => {
           </div>
         </div>
       ))}
+     </div>
     </div>
   );
 };

@@ -44,7 +44,7 @@ const Shop = () => {
   }
 
   if (categoryListError) {
-    return <ErrorPage  massage={isError.massage} onRefetch={refetch}/>;
+    return <ErrorPage  massage={categoryListError.massage} onRefetch={refetch}/>;
   }
 
   // all products
