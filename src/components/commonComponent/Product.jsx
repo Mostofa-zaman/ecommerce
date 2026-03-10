@@ -1,10 +1,11 @@
 import Star from "./Star";
-import { useVirtualizer } from '@tanstack/react-virtual';
+import { useVirtualizer } from "@tanstack/react-virtual";
 import ProductSkeleton from "../Skeletion/ProductSkeleton";
 import Container from "./Container";
 import { useRef } from "react";
 
-const Product = ({ productInfo, isLoading, isError, partialItemLoad = 8 }) => {
+const Product = ({ productInfo, isLoading, isError }) => {
+
   if (isLoading) {
     return (
       <Container>
@@ -18,106 +19,105 @@ const Product = ({ productInfo, isLoading, isError, partialItemLoad = 8 }) => {
   }
 
   if (isError) {
-    return (
-      <div>
-        <section className="bg-white dark:bg-gray-900">
-          <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-            <div className="mx-auto max-w-screen-sm text-center">
-              <h1 className="mb-4 text-7xl lg:text-9xl font-extrabold text-primary-600 dark:text-primary-500">
-                404
-              </h1>
-              <p className="mb-4 text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-                Something's missing.
-              </p>
-              <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
-                Sorry, we can't find that page. You'll find lots to explore on the home page.
-              </p>
-              <a
-                href="#"
-                className="inline-flex text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4"
-              >
-                Back to Homepage
-              </a>
-            </div>
-          </div>
-        </section>
-      </div>
-    );
+    return <div>Error Loading Products</div>;
   }
-    const parentRef = useRef(null)
-    console.log("price filer data",parentRef)
-      // The virtualizer
-  const rowVirtualizer = useVirtualizer({
-    count:productInfo.length || 10000,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 35,
-  })
 
+  const parentRef = useRef(null);
+  const products = productInfo?.data?.products || [];
+
+  const columns = 4;
+  const rows = Math.ceil(products.length / columns);
+
+  const rowVirtualizer = useVirtualizer({
+    count: rows,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 360,
+  });
 
   return (
-    <div ref={parentRef}  style={{
-          height: `1500px`,
-          overflow: 'auto', // Make it scroll!
-        }}>
-     <div  className="flex flex-wrap gap-4 mt-10"   style={{
-            height: `${rowVirtualizer.getTotalSize()}px`,
-            width: '100%',
-            position: 'relative',
-          }}>
-       {rowVirtualizer.getVirtualItems().map((product) => (
-        <div
-         key={product.key}
+    <div
+      ref={parentRef}
+      style={{
+        height: " 1200px",
+        overflow: "auto",
+      }}
+    >
+      <div
+        style={{
+          height: `${rowVirtualizer.getTotalSize()}px`,
+          position: "relative",
+          width: "100%",
+        }}
+      >
+        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+
+          const rowIndex = virtualRow.index;
+          const items = products.slice(
+            rowIndex * columns,
+            rowIndex * columns + columns
+          );
+
+          return (
+            <div
+              key={virtualRow.key}
               style={{
-                position: 'absolute',
+                position: "absolute",
                 top: 0,
                 left: 0,
-                width: '100%',
-                height: `${product.size}px`,
-                transform: `translateY(${product.start}px)`,
+                width: "100%",
+                transform: `translateY(${virtualRow.start}px)`
               }}
-          className="w-[calc(25%-1rem)] hover:shadow-lg rounded-2xl transition-shadow duration-300 bg-white relative"
-        >
-          <div className="p-5 border border-gray_50 rounded-2xl">
-            <div className="flex flex-col items-start justify-start gap-y-3 relative">
-              {/* Discount / HOT badge */}
-              <span className="absolute top-3 left-3 bg-danger_500 text-white text-sm py-1 px-2 rounded z-10">
-                {product.discount ? `${product.discount}% OFF` : "HOT"}
-              </span>
+              className="flex gap-4 mt-4"
+            >
+              {items.map((product) => (
+                <div
+                  key={product.id}
+                  className="w-[calc(25%-1rem)] hover:shadow-lg rounded-2xl transition-shadow duration-300 bg-white relative"
+                >
+                  <div className="p-5 border border-gray_50 rounded-2xl">
+                    <div className="flex flex-col items-start justify-start gap-y-3 relative">
 
-              {/* Image container */}
-              <div className="relative w-[202px] h-[172px]">
-                <img
-                  src={product.images?.[0]}
-                  alt={product.title}
-                  className="w-full h-full object-cover bg-gray-100 rounded"
-                />
-                {/* Hover overlay buttons */}
-                <div className="absolute inset-0 flex justify-center items-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-opacity-30 rounded">
-                  <button className="bg-black text-white px-4 py-2 rounded-full shadow-md hover:bg-gray-800 transition-colors duration-200 font-medium">
-                    Add to Cart
-                  </button>
-                  <button className="bg-black text-red-500 px-3 py-2 rounded-full shadow-md hover:bg-gray-800 transition-colors duration-200">
-                    ❤️
-                  </button>
+                      <span className="absolute top-3 left-3 bg-red-500 text-white text-sm py-1 px-2 rounded z-10">
+                        {product.discount ? `${product.discount}% OFF` : "HOT"}
+                      </span>
+
+                      <div className="relative w-[202px] h-[172px]">
+                        <img
+                          src={product.images?.[0]}
+                          alt={product.title}
+                          className="w-full h-full object-cover bg-gray-100 rounded"
+                        />
+
+                        <div className="absolute inset-0 flex justify-center items-center gap-2 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                          <button className="bg-black text-white px-4 py-2 rounded-full">
+                            Add to Cart
+                          </button>
+                          <button className="bg-black text-red-500 px-3 py-2 rounded-full">
+                            ❤️
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-x-1 mt-2">
+                        <Star rating={product.rating} />
+                        <span>({product.reviews?.length || 0})</span>
+                      </div>
+
+                      <h2 className="w-full truncate">{product.title}</h2>
+
+                      <div className="flex gap-x-3">
+                        <del>$1600</del>
+                        <span>${product.price}</span>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex items-center gap-x-1 mt-2">
-                <Star rating={product.rating} />
-                <span>({product.reviews?.length || 0})</span>
-              </div>
-
-              <h2 className="w-full truncate">{product.title}</h2>
-
-              <div className="flex gap-x-3">
-                <del>$1600</del>
-                <span>${product.price}</span>
-              </div>
+              ))}
             </div>
-          </div>
-        </div>
-      ))}
-     </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
