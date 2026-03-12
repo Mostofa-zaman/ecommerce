@@ -3,8 +3,10 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import ProductSkeleton from "../Skeletion/ProductSkeleton";
 import Container from "./Container";
 import { useRef } from "react";
+import { Link } from "react-router";
 
 const Product = ({ productInfo, isLoading, isError }) => {
+  const products = productInfo?.data?.products || productInfo?.products || [];
 
   if (isLoading) {
     return (
@@ -23,7 +25,7 @@ const Product = ({ productInfo, isLoading, isError }) => {
   }
 
   const parentRef = useRef(null);
-  const products = productInfo?.data?.products || [];
+  // const products = productInfo?.data?.products || [];
 
   const columns = 4;
   const rows = Math.ceil(products.length / columns);
@@ -59,7 +61,7 @@ const Product = ({ productInfo, isLoading, isError }) => {
 
           return (
             <div
-              key={virtualRow.key}
+             key={`row-${virtualRow.index}`}
               style={{
                 position: "absolute",
                 top: 0,
@@ -74,6 +76,7 @@ const Product = ({ productInfo, isLoading, isError }) => {
                   key={product.id}
                   className="w-[calc(25%-1rem)] hover:shadow-lg rounded-2xl transition-shadow duration-300 bg-white relative"
                 >
+                 <Link to={`/product/1${product.id}`} >
                   <div className="p-5 border border-gray_50 rounded-2xl">
                     <div className="flex flex-col items-start justify-start gap-y-3 relative">
 
@@ -112,6 +115,8 @@ const Product = ({ productInfo, isLoading, isError }) => {
 
                     </div>
                   </div>
+                 
+                 </Link>
                 </div>
               ))}
             </div>

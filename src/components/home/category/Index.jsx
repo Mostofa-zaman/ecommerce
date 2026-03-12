@@ -37,12 +37,10 @@ const Category = () => {
             clickable: true,
           }}
         >
-          {data?.data?.map((item, index) => (
-            <div key={index}>
-              <SwiperSlide>
-                <CategoryItem item={item} />
-              </SwiperSlide>
-            </div>
+          {data?.data?.map((item) => (
+            <SwiperSlide key={item._id || item.id}>
+              <CategoryItem item={item} />
+            </SwiperSlide>
           ))}
         </Swiper>
       </Container>

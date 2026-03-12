@@ -12,6 +12,9 @@ const BestProduct = () => {
   if (isPending) {
     return <div className="">loading...</div>;
   }
+
+  const products = data?.data?.products || [];
+
   const bestproduct = [
     {
       id: 1,
@@ -44,7 +47,7 @@ const BestProduct = () => {
         <div className="grid grid-cols-4 gap-x-4 items-center justify-between">
             {bestproduct?.map((item)=>( 
                 <div key={item.id}>
-                <BestSellingProductContent productlist={data.data.products.slice(item.start , item.end)}
+                <BestSellingProductContent productlist={products.slice(item.start , item.end)}
             title={ item.title || `FLASH SALE TODAY`}
           />
                 </div>
