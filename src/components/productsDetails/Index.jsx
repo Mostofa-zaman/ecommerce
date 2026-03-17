@@ -1,22 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BreadCrumb from "../commonComponent/BreadCrumb";
 import { useParams } from "react-router";
 import { usegetSingleproduct } from "../../hooks/useCategory";
 
 const ProductsDetailsPge = () => {
-  const {id}=useParams()
- const {isPending, error, data,refetch  } = usegetSingleproduct(id)
-  const [mainImage, setMainImage] = useState(
-    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
-  );
+  const [product, setproduct] = useState("");
+  const [mainImage, setMainImage] = useState("");
+  const {id} = useParams()
+ const {isPending, error, data,refetch  } = usegetSingleproduct(id);
+ useEffect(()=>{
+  if(data?.data){
+    setproduct(data.data);
+    setMainImage(data.data.images[0] );
+  }
+ },[data])
+ if(isPending)
+  return <div>Loading...</div>;
+if(error)
+  return <div>Error: {error.message}</div>;
 
-  const thumbnails = [
-    "https://images.unsplash.com/photo-1505751171710-1f6d0ace5a85",
-    "https://images.unsplash.com/photo-1484704849700-f032a568e944",
-    "https://images.unsplash.com/photo-1496957961599-e35b69ef5d7c",
-    "https://images.unsplash.com/photo-1528148343865-51218c4a13e6",
-  ];
-  console.log(data?.data)
+
 
   return (
     <div>
@@ -29,17 +32,17 @@ const ProductsDetailsPge = () => {
             {/* Product Images */}
             <div className="w-full md:w-1/2 px-4 mb-8">
               <img
-                src={mainImage}
+                src={mainImage || data?.data?.images[0]}
                 alt="product"
                 className="w-full rounded-lg shadow-md mb-4"
               />
 
               <div className="flex gap-4 justify-center overflow-x-auto">
-                {thumbnails.map((img, index) => (
+                {data?.data?.images.map((img, index) => (
                   <img
                     key={index}
                     src={img}
-                    alt="thumbnail"
+                    alt={`thumbnail${index}`}
                     onClick={() => setMainImage(img)}
                     className="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition"
                   />
