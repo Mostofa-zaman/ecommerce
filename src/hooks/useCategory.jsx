@@ -30,10 +30,10 @@ const usegetproductbycategory = (categoryName) => {
   return { isPending, error, data, refetch };
 };
 // best product using limit & skip
-const usegetproductbylimit = (limit) => {
+const usegetproductbylimit = () => {
   const { isPending, error, data,refetch } = useQuery({
     queryKey: ["productsskiplimit"],
-    queryFn: () => getProductbyLimit(limit),
+    queryFn: () => getProductbyLimit,
     // enabled: !!skip  ,
   });
 

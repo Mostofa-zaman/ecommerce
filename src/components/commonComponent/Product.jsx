@@ -76,7 +76,7 @@ const Product = ({ productInfo, isLoading, isError }) => {
                   key={product.id}
                   className="w-[calc(25%-1rem)] hover:shadow-lg rounded-2xl transition-shadow duration-300 bg-white relative"
                 >
-                 <Link to={`/product/1${product.id}`} >
+                 <Link to={`/product/${product.id}`} >
                   <div className="p-5 border border-gray_50 rounded-2xl">
                     <div className="flex flex-col items-start justify-start gap-y-3 relative">
 

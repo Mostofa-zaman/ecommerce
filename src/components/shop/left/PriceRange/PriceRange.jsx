@@ -17,11 +17,11 @@ const PriceRange = ({ priceRange, setPriceRange }) => {
 useEffect(()=>{
   const timer = setTimeout(()=>{
   setDebouncedValue(value);
-  console.log("debounced value" ,value)
+  // console.log("debounced value" ,value)
   },3000)
   return () => clearTimeout(timer); 
 },[value])
-console.log(value)
+// console.log(value)
 
   const handleSlider = (value) => {
     setPriceRange(value);

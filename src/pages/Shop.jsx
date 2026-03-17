@@ -67,8 +67,8 @@ const Shop = () => {
       if (!search) return true;
       return item.title.toLowerCase().includes(search.toLowerCase());
     });
-  console.log(category);
-  console.log(filterData);
+  // console.log(category);
+  // console.log(filterData);
 
 
   return (

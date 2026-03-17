@@ -1,7 +1,10 @@
 import { useState } from "react";
 import BreadCrumb from "../commonComponent/BreadCrumb";
+import { useParams } from "react-router";
 
 const ProductsDetailsPge = () => {
+  const {id}=useParams()
+  console.log(id)
   const [mainImage, setMainImage] = useState(
     "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
   );
