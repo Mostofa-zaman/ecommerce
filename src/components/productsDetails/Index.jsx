@@ -1,10 +1,11 @@
 import { useState } from "react";
 import BreadCrumb from "../commonComponent/BreadCrumb";
 import { useParams } from "react-router";
+import { usegetSingleproduct } from "../../hooks/useCategory";
 
 const ProductsDetailsPge = () => {
   const {id}=useParams()
-  console.log(id)
+ const {isPending, error, data,refetch  } = usegetSingleproduct(id)
   const [mainImage, setMainImage] = useState(
     "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
   );
@@ -15,6 +16,7 @@ const ProductsDetailsPge = () => {
     "https://images.unsplash.com/photo-1496957961599-e35b69ef5d7c",
     "https://images.unsplash.com/photo-1528148343865-51218c4a13e6",
   ];
+  console.log(data?.data)
 
   return (
     <div>

@@ -49,13 +49,25 @@ const getProductbyCategory = async (categoryName = "furniture") => {
 /**
  * Get best products using limit & skip
  */
-const getProductbyLimit = async (limit = 12) => {
+const getProductbyLimit = async () => {
   try {
     const { data, status, statusText } = await instance.get(
-      `/products?limit=${limit}&skip=0`
+      `/products?limit=12&skip=0`
     );
 
-    console.log(data);
+    return { data, status, statusText };
+  } catch (error) {
+    console.error("product network request failed", error);
+    throw error;
+  }
+};
+
+// get single product
+const SingleProduct = async (id) => {
+  try {
+    const { data, status, statusText } = await instance.get(
+      `/products/${id}`
+    );
 
     return { data, status, statusText };
   } catch (error) {
@@ -69,4 +81,5 @@ export {
   getAllProduct,
   getProductbyCategory,
   getProductbyLimit,
+  SingleProduct,
 };
