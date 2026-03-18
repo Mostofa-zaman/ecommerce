@@ -6,20 +6,18 @@ import { usegetSingleproduct } from "../../hooks/useCategory";
 const ProductsDetailsPge = () => {
   const [product, setproduct] = useState("");
   const [mainImage, setMainImage] = useState("");
-  const {id} = useParams()
- const {isPending, error, data,refetch  } = usegetSingleproduct(id);
+  const {id} = useParams();
+ const {isPending, error, data} = usegetSingleproduct(id);
  useEffect(()=>{
   if(data?.data){
     setproduct(data.data);
-    setMainImage(data.data.images[0] );
+    setMainImage(data.data.images[0]);
   }
  },[data])
  if(isPending)
   return <div>Loading...</div>;
 if(error)
   return <div>Error: {error.message}</div>;
-
-
 
   return (
     <div>
