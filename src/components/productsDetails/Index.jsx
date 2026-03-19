@@ -4,20 +4,45 @@ import { useParams } from "react-router";
 import { usegetSingleproduct } from "../../hooks/useCategory";
 
 const ProductsDetailsPge = () => {
-  const [product, setproduct] = useState("");
+  const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
-  const {id} = useParams();
- const {isPending, error, data} = usegetSingleproduct(id);
- useEffect(()=>{
-  if(data?.data){
-    setproduct(data.data);
-    setMainImage(data.data.images[0]);
-  }
- },[data])
- if(isPending)
-  return <div>Loading...</div>;
-if(error)
-  return <div>Error: {error.message}</div>;
+
+  const { id } = useParams();
+  const { isPending, error, data } = usegetSingleproduct(id);
+
+  useEffect(() => {
+    if (data?.data) {
+      setProduct(data.data);
+      setMainImage(data.data.images?.[0]);
+    }
+  }, [data]);
+
+  // 🛒 Add to cart handler
+  const handleAddToCart = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existing = cart.find((item) => item.id === product.id);
+
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Product added to cart ✅");
+  };
+
+  if (isPending) return <div>Loading...</div>;
+  if (error) return <div>Error loading product</div>;
+
+  if (!product) return null;
+
+  // 💰 price calc
+  const discountedPrice = (
+    product.price -
+    (product.price * product.discountPercentage) / 100
+  ).toFixed(2);
 
   return (
     <div>
@@ -26,70 +51,84 @@ if(error)
       <div className="bg-gray_50 py-10">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap -mx-4">
-
-            {/* Product Images */}
+            {/* Images */}
             <div className="w-full md:w-1/2 px-4 mb-8">
               <img
-                src={mainImage || data?.data?.images[0]}
+                src={mainImage}
                 alt="product"
                 className="w-full rounded-lg shadow-md mb-4"
               />
 
               <div className="flex gap-4 justify-center overflow-x-auto">
-                {data?.data?.images.map((img, index) => (
+                {product.images?.map((img, index) => (
                   <img
                     key={index}
                     src={img}
-                    alt={`thumbnail${index}`}
+                    alt={`thumb-${index}`}
                     onClick={() => setMainImage(img)}
-                    className="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition"
+                    className={`size-16 sm:size-20 object-cover rounded-md cursor-pointer border ${
+                      mainImage === img ? "border-primary_500" : ""
+                    }`}
                   />
                 ))}
               </div>
             </div>
 
-            {/* Product Details */}
+            {/* Details */}
             <div className="w-full md:w-1/2 px-4">
+              {/* Title */}
+              <h2 className="heading3 text-gray_900 mb-2">{product.title}</h2>
 
-              <h2 className="heading3 text-gray_900 mb-2">
-                Premium Wireless Headphones
-              </h2>
+              {/* SKU */}
+              <p className="body_sm_400 text-gray_500 mb-2">
+                SKU: {product.sku}
+              </p>
 
+              {/* Brand */}
               <p className="body_sm_400 text-gray_500 mb-4">
-                SKU: WH1000XM4
+                Brand: {product.brand}
               </p>
 
+              {/* Price */}
               <div className="flex items-center gap-3 mb-4">
-                <span className="heading3 text-primary_500">$349.99</span>
+                <span className="heading3 text-primary_500">
+                  ${discountedPrice}
+                </span>
+
                 <span className="body_md_400 text-gray_400 line-through">
-                  $399.99
+                  ${product.price}
+                </span>
+
+                <span className="text-green-500 text-sm">
+                  -{product.discountPercentage}%
                 </span>
               </div>
 
-              {/* rating */}
+              {/* Rating */}
               <div className="flex items-center mb-4">
-                <div className="flex text-warning_500 text-xl">★★★★★</div>
+                <div className="text-warning_500 text-xl">
+                  {"★".repeat(Math.round(product.rating))}
+                  {"☆".repeat(5 - Math.round(product.rating))}
+                </div>
+
                 <span className="ml-2 body_sm_400 text-gray_600">
-                  4.5 (120 reviews)
+                  {product.rating} ({product.reviews?.length || 0} reviews)
                 </span>
               </div>
 
-              <p className="body_md_400 text-gray_700 mb-6">
-                Experience premium sound quality and industry-leading noise
-                cancellation with these wireless headphones. Perfect for music
-                lovers and frequent travelers.
+              {/* Stock */}
+              <p
+                className={`mb-4 font-medium ${
+                  product.stock > 0 ? "text-green-600" : "text-red-500"
+                }`}
+              >
+                {product.availabilityStatus} ({product.stock} left)
               </p>
 
-              {/* Colors */}
-              <div className="mb-6">
-                <h3 className="label2 text-gray_900 mb-2">Color</h3>
-
-                <div className="flex gap-3">
-                  <button className="w-8 h-8 bg-black rounded-full border"></button>
-                  <button className="w-8 h-8 bg-gray_300 rounded-full border"></button>
-                  <button className="w-8 h-8 bg-blue-500 rounded-full border"></button>
-                </div>
-              </div>
+              {/* Description */}
+              <p className="body_md_400 text-gray_700 mb-6">
+                {product.description}
+              </p>
 
               {/* Quantity */}
               <div className="mb-6">
@@ -107,31 +146,86 @@ if(error)
 
               {/* Buttons */}
               <div className="flex gap-4 mb-6">
-
-                <button className="flex items-center gap-2 bg-primary_500 text-white px-6 py-2 rounded-md hover:bg-primary_600 transition">
+                <button
+                  // onClick={handleAddToCart}
+                  className="bg-primary_500 text-white px-6 py-2 rounded-md hover:bg-primary_600 transition"onClick={()=>console.log("add to cart ", product)}
+                >
                   Add to Cart
                 </button>
 
-                <button className="flex items-center gap-2 bg-gray_200 text-gray_800 px-6 py-2 rounded-md hover:bg-gray_300 transition">
+                <button className="bg-gray_200 px-6 py-2 rounded-md hover:bg-gray_300">
                   Wishlist
                 </button>
-
               </div>
 
-              {/* Features */}
-              <div>
-                <h3 className="label2 text-gray_900 mb-2">
-                  Key Features
+              {/* Extra Info */}
+              <div className="bg-white rounded-xl shadow-sm p-5 mt-5 border border-gray-100">
+                <h3 className="text-xl font-semibold text-gray-900 mb-5">
+                  Product Information
                 </h3>
 
-                <ul className="list-disc list-inside body_md_400 text-gray_700 space-y-1">
-                  <li>Industry-leading noise cancellation</li>
-                  <li>30-hour battery life</li>
-                  <li>Touch sensor controls</li>
-                  <li>Speak-to-chat technology</li>
-                </ul>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">📦</span>
+                    <div>
+                      <p className="text-base font-semibold text-gray-800">
+                        Shipping
+                      </p>
+                      <p className="text-sm text-gray-500 mt-1">
+                        {product.shippingInformation}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">🔁</span>
+                    <div>
+                      <p className="text-base font-semibold text-gray-800">
+                        Return Policy
+                      </p>
+                      <p className="text-sm text-gray-500 mt-1">
+                        {product.returnPolicy}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">🛡</span>
+                    <div>
+                      <p className="text-base font-semibold text-gray-800">
+                        Warranty
+                      </p>
+                      <p className="text-sm text-gray-500 mt-1">
+                        {product.warrantyInformation}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">📊</span>
+                    <div>
+                      <p className="text-base font-semibold text-gray-800">
+                        Minimum Order
+                      </p>
+                      <p className="text-sm text-gray-500 mt-1">
+                        {product.minimumOrderQuantity} pcs
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
+              {/* Tags */}
+              <div className="mt-4 flex gap-2 flex-wrap">
+                {product.tags?.map((tag, i) => (
+                  <span
+                    key={i}
+                    className="bg-gray-200 px-2 py-1 rounded text-xs"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
