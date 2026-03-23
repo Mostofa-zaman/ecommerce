@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import BreadCrumb from "../commonComponent/BreadCrumb";
 import { useParams } from "react-router";
 import { usegetSingleproduct } from "../../hooks/useCategory";
+// import { addTocart } from "../../features/counter/counterSlice";
+import { useSelector, useDispatch } from 'react-redux'
+import { addTocart } from "../../features/addtocart";
 
 const ProductsDetailsPge = () => {
+  const dispatch = useDispatch()
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
 
@@ -17,24 +21,27 @@ const ProductsDetailsPge = () => {
     }
   }, [data]);
 
-  // 🛒 Add to cart handler
-  const handleAddToCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  // // 🛒 Add to cart handler
+  //  const handleAddToCart = () => {
+  //   const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    const existing = cart.find((item) => item.id === product.id);
+  //   const existing = cart.find((item) => item.id === product.id);
 
-    if (existing) {
-      existing.quantity += 1;
-    } else {
-      cart.push({ ...product, quantity: 1 });
-    }
+  //   if (existing) {
+  //     existing.quantity += 1;
+  //   } else {
+  //     cart.push({ ...product, quantity: 1 });
+  //   }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Product added to cart ✅");
-  };
+  //   localStorage.setItem("cart", JSON.stringify(cart));
+  //   alert("Product added to cart ✅");
+  // };
 
   if (isPending) return <div>Loading...</div>;
   if (error) return <div>Error loading product</div>;
+  const handleAddToCart = (product)=>{ 
+    dispatch(addTocart(product))
+  }
 
   if (!product) return null;
 
@@ -148,7 +155,7 @@ const ProductsDetailsPge = () => {
               <div className="flex gap-4 mb-6">
                 <button
                   // onClick={handleAddToCart}
-                  className="bg-primary_500 text-white px-6 py-2 rounded-md hover:bg-primary_600 transition"onClick={()=>console.log("add to cart ", product)}
+                  className="bg-primary_500 text-white px-6 py-2 rounded-md hover:bg-primary_600 transition"onClick={()=> handleAddToCart(product)}
                 >
                   Add to Cart
                 </button>
