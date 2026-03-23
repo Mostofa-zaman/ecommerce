@@ -10,6 +10,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Layout from "./components/commonComponent/Layout";
 import Shop from "./pages/Shop";
 import ProductsDetailsPge from "./components/productsDetails/Index";
+import AddToCart from "./pages/AddToCart";
 
 function App() {
   const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="shop" element={<Shop />} />
               <Route path="product/:id" element={<ProductsDetailsPge/>} />
+              <Route path="cart" element={<AddToCart/>} />
 
               <Route path="*" element={"no data "} />
             </Route>

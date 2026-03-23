@@ -42,7 +42,7 @@ const ProductsDetailsPge = () => {
   const handleAddToCart = (product)=>{ 
     dispatch(addTocart(product))
   }
-
+useSelector((cart)=>console.log(cart.cartStore ))
   if (!product) return null;
 
   // 💰 price calc
