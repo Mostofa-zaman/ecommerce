@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import BreadCrumb from "../commonComponent/BreadCrumb";
 import { useParams } from "react-router";
 import { usegetSingleproduct } from "../../hooks/useCategory";
-// import { addTocart } from "../../features/counter/counterSlice";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import { addTocart } from "../../features/addtocart";
 
 const ProductsDetailsPge = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
 
@@ -21,31 +21,15 @@ const ProductsDetailsPge = () => {
     }
   }, [data]);
 
-  // // 🛒 Add to cart handler
-  //  const handleAddToCart = () => {
-  //   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  //   const existing = cart.find((item) => item.id === product.id);
-
-  //   if (existing) {
-  //     existing.quantity += 1;
-  //   } else {
-  //     cart.push({ ...product, quantity: 1 });
-  //   }
-
-  //   localStorage.setItem("cart", JSON.stringify(cart));
-  //   alert("Product added to cart ✅");
-  // };
+  const handleAddToCart = (product) => {
+    dispatch(addTocart(product));
+  };
 
   if (isPending) return <div>Loading...</div>;
   if (error) return <div>Error loading product</div>;
-  const handleAddToCart = (product)=>{ 
-    dispatch(addTocart(product))
-  }
-useSelector((cart)=>console.log(cart.cartStore ))
   if (!product) return null;
 
-  // 💰 price calc
+  // 💰 price calculation
   const discountedPrice = (
     product.price -
     (product.price * product.discountPercentage) / 100
@@ -58,7 +42,7 @@ useSelector((cart)=>console.log(cart.cartStore ))
       <div className="bg-gray_50 py-10">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap -mx-4">
-            {/* Images */}
+            {/* ================= Images ================= */}
             <div className="w-full md:w-1/2 px-4 mb-8">
               <img
                 src={mainImage}
@@ -81,10 +65,12 @@ useSelector((cart)=>console.log(cart.cartStore ))
               </div>
             </div>
 
-            {/* Details */}
+            {/* ================= Details ================= */}
             <div className="w-full md:w-1/2 px-4">
               {/* Title */}
-              <h2 className="heading3 text-gray_900 mb-2">{product.title}</h2>
+              <h2 className="heading3 text-gray_900 mb-2">
+                {product.title}
+              </h2>
 
               {/* SKU */}
               <p className="body_sm_400 text-gray_500 mb-2">
@@ -118,7 +104,7 @@ useSelector((cart)=>console.log(cart.cartStore ))
                   {"☆".repeat(5 - Math.round(product.rating))}
                 </div>
 
-                <span className="ml-2 body_sm_400 text-gray_600">
+                <span className="ml-2 body_sm_400 text-gray-600">
                   {product.rating} ({product.reviews?.length || 0} reviews)
                 </span>
               </div>
@@ -133,13 +119,13 @@ useSelector((cart)=>console.log(cart.cartStore ))
               </p>
 
               {/* Description */}
-              <p className="body_md_400 text-gray_700 mb-6">
+              <p className="body_md_400 text-gray-700 mb-6">
                 {product.description}
               </p>
 
               {/* Quantity */}
               <div className="mb-6">
-                <label className="label3 text-gray_700 block mb-1">
+                <label className="label3 text-gray-700 block mb-1">
                   Quantity
                 </label>
 
@@ -154,18 +140,18 @@ useSelector((cart)=>console.log(cart.cartStore ))
               {/* Buttons */}
               <div className="flex gap-4 mb-6">
                 <button
-                  // onClick={handleAddToCart}
-                  className="bg-primary_500 text-white px-6 py-2 rounded-md hover:bg-primary_600 transition"onClick={()=> handleAddToCart(product)}
+                  onClick={() => handleAddToCart(product)}
+                  className="bg-primary_500 text-white px-6 py-2 rounded-md hover:bg-primary_600 transition"
                 >
                   Add to Cart
                 </button>
 
-                <button className="bg-gray_200 px-6 py-2 rounded-md hover:bg-gray_300">
+                <button className="bg-gray_200 px-6 py-2 rounded-md hover:bg-gray-300">
                   Wishlist
                 </button>
               </div>
 
-              {/* Extra Info */}
+              {/* ================= Extra Info ================= */}
               <div className="bg-white rounded-xl shadow-sm p-5 mt-5 border border-gray-100">
                 <h3 className="text-xl font-semibold text-gray-900 mb-5">
                   Product Information
@@ -234,6 +220,7 @@ useSelector((cart)=>console.log(cart.cartStore ))
                 ))}
               </div>
             </div>
+            {/* ================= End Details ================= */}
           </div>
         </div>
       </div>
