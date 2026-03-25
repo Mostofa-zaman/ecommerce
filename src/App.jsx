@@ -24,7 +24,6 @@ function App() {
               <Route path="shop" element={<Shop />} />
               <Route path="product/:id" element={<ProductsDetailsPge/>} />
               <Route path="cart" element={<AddToCart/>} />
-
               <Route path="*" element={"no data "} />
             </Route>
           </Routes>
